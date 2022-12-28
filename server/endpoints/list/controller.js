@@ -1,7 +1,7 @@
 import pkg from 'lodash';
 const { isEmpty } = pkg;
 
-import ListModel from "./models.js";
+import ListModel from './models.js';
 
 export const getList = async (req, res) => {
     const { user } = req.query

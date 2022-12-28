@@ -10,7 +10,7 @@ import {
     postNewStatus,
     putChangeApp,
     putChangeStatus
-}from "./controller.js";
+}from './controller.js';
 
 router.get('/getAppList', getAppList);
 router.get('/getStatusList', getStatusList);

@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { getList, postItemToList } from "./controller.js";
+import { getList, postItemToList } from './controller.js';
 
 router.get('/getList', getList);
 router.post('/postItemToList', postItemToList)

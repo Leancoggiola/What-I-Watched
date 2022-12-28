@@ -1,9 +1,9 @@
 // Styling
-import "./Navbar.scss"
+import './Navbar.scss'
 
 const Navbar = ({isCollapse}) => {
     return (
-        <nav className={`navigation ${isCollapse ? "navigation-collapse" : "navigation-expanded"}`}>
+        <nav className={`navigation ${isCollapse ? 'navigation-collapse' : 'navigation-expanded'}`}>
         </nav>
     )
 }

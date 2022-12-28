@@ -1,5 +1,5 @@
-import express from "express";
-import bodyParser from "body-parser";
+import express from 'express';
+import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
@@ -26,5 +26,5 @@ app.use('/meta', metadataRoutes)
 // DB config
 mongoose.set('strictQuery', true)
 mongoose.connect(CONNECTION_URL)
-    .then(() => app.listen(PORT, () => console.log("Server listening on", PORT)))
+    .then(() => app.listen(PORT, () => console.log('Server listening on', PORT)))
     .catch((err) => console.error(err.message));

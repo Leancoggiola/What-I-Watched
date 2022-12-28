@@ -1,6 +1,6 @@
 import multiparty from 'multiparty';
 import * as fs from 'fs';
-import _ from "lodash";
+import _ from 'lodash';
 
 export const uploadImage = (req) => {
     return new Promise((resolve, reject) => {

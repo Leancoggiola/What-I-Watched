@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 // Components
-import Navbar from "../Navbar"
+import Navbar from '../Navbar'
 // Assets
-import { ReactComponent as MenuIcon } from "../../assets/menu-icon.svg"
+import { ReactComponent as MenuIcon } from '../../assets/menu-icon.svg'
 // Styling
-import "./Header.scss"
+import './Header.scss'
 
 const Header = (props) => {
     const { logo: AppIcon, search: SearchBar} = props;
@@ -13,12 +13,12 @@ const Header = (props) => {
     return (
         <>
             <header>
-                <div className="header-menu">
-                    <button type="button" onClick={() => setToggleNavBar(!isCollapse)}><MenuIcon/></button>
+                <div className='header-menu'>
+                    <button type='button' onClick={() => setToggleNavBar(!isCollapse)}><MenuIcon/></button>
                 </div>
-                <div className="header-logo"><AppIcon/></div>
-                <div className="header-title"><h1>What I Saw App</h1></div>
-                <div className="header-search"><SearchBar/></div>
+                <div className='header-logo'><AppIcon/></div>
+                <div className='header-title'><h1>What I Saw App</h1></div>
+                <div className='header-search'><SearchBar/></div>
             </header>
             <Navbar isCollapse={isCollapse}/>
         </>

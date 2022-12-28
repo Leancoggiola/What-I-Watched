@@ -2,7 +2,7 @@ header {
     position: fixed;
     display: grid; 
     grid-template-columns: 4rem repeat(2, min-content) 50%;
-    grid-template-areas: "Menu Title Logo Search"; 
+    grid-template-areas: 'Menu Title Logo Search'; 
     align-items: center;
     gap: 0 2rem; 
     width: 100%;
