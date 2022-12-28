@@ -1,0 +1,51 @@
+header {
+    position: fixed;
+    display: grid; 
+    grid-template-columns: 4rem repeat(2, min-content) 50%;
+    grid-template-areas: "Menu Title Logo Search"; 
+    align-items: center;
+    gap: 0 2rem; 
+    width: 100%;
+    min-height: 4rem;
+    z-index: 100;
+    top: 0;
+    background-color: var(--header-primary-color);
+
+    .header-menu {
+        grid-area: Menu;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 100%;
+        button {
+            background: transparent;
+            border: none;
+            svg {
+                stroke: var(--icon-color);
+                height: 2rem;
+                width: 2rem;
+            }
+        }
+    }
+
+    .header-logo {
+        grid-area: Logo;
+        svg {
+            height: 3.75rem;
+            width: 3.75rem;
+        }
+    }
+    .header-title {
+        grid-area: Title;
+        h1 {
+            margin: 0;
+            white-space: nowrap;
+        }
+    }
+    .header-search {
+        grid-area: Search;
+        position: absolute;
+        width: 100%;
+        left: calc(50% - 7rem)
+    }
+}

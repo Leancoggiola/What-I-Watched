@@ -1,0 +1,14 @@
+@use "./_customVariables.scss";
+
+.theme-default {
+    --body-bg: #{$bg-default};
+    --body-color: #{$color-default};
+
+    --icon-color: #{$icon-color-default};
+
+    --header-primary-color: #{$header-color-default};
+    --header-search-bg:#{$bg-default};
+    --header-search-color:#{$color-default};
+
+    --navbar-bg:#{$navbar-color-default};
+}

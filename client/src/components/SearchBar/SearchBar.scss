@@ -1,0 +1,28 @@
+.search-bar {
+    display: flex;
+    position: relative;
+    width: 100%;
+    input {
+        background-color: var(--header-search-bg);
+        font-size: 1rem;
+        color: var(--header-search-color);
+        height: 4rem;
+        width: 100%;
+        border: none;
+        margin: 0;
+        padding: 0 2rem;
+        &::placeholder { color: var(--header-search-color) }
+    }
+    button {
+        position: absolute;
+        height: 100%;
+        right: 5%;
+        border: none;
+        background-color: var(--header-search-bg);
+        svg { 
+            fill: var(--icon-color);
+            height: 65%;
+            width: 65%;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    overflow: auto;
+    bottom: 0;
+
+    height: calc(100vh - 4rem);
+    z-index: 100;
+
+    background-color: var(--navbar-bg);
+
+    &-collapse {
+        width: 4rem;
+        transition: width 0.5s;
+    }
+    &-expanded {
+        width: 20rem;
+        transition: width 0.5s;
+    }
+}
