@@ -1,4 +1,5 @@
-import { AppModel, StatusModel  } from "./models.js"
+import { uploadImage } from "../helpers.js";
+import { AppModel, StatusModel  } from "./models.js";
 
 // Status
 export const getStatusList = async (req, res) => {
@@ -58,13 +59,14 @@ export const getAppList = async (req, res) => {
 
 export const postNewApp = async (req, res) => {
     try {
-        const { body } = req;
+        const body = await uploadImage(req);
         const newApp = new AppModel({
-            name: body.name.toLowerCase().replace(" ",""),
+            ...body,
+            name: body.name.toLowerCase().replaceAll(" ",""),
             displayName: body.name
         });
         newApp.save()
-            .then(app => res.status(201).json(app))
+            .then(() => res.status(201).json({ message: "The app was successfully uploaded"}))
             .catch(err => res.status(400).json({ message: err.message }))
     } catch(e) {
         res.status(e?.status ? e.status : 400).json({ message: e.message })
@@ -73,8 +75,8 @@ export const postNewApp = async (req, res) => {
 
 export const deleteApp = async (req, res) => {
     try {
-        const { body } = req;
-        AppModel.remove(body)
+        const { params: { _id} } = req;
+        AppModel.remove(_id)
             .then(() => res.status(200).json("Deleted successfully"))
             .catch(err => res.status(400).json({ message: err.message }))
     } catch(e) {
@@ -84,8 +86,16 @@ export const deleteApp = async (req, res) => {
 
 export const putChangeApp = async (req, res) => {
     try {
-        const { body } = req;
-        AppModel.updateOne({ _id: body._id}, body)
+        const { params: { _id} } = req;
+        let body = await uploadImage(req);
+        if(body?.name) {
+            body = {
+                ...body,
+                name: body.name.toLowerCase().replaceAll(" ",""),
+                displayName: body.name
+            }
+        }
+        AppModel.updateOne(_id, body)
             .then(() => res.status(200).json("Updated successfully"))
             .catch(err => res.status(400).json({ message: err.message }))
     } catch(e) {

@@ -1,13 +1,20 @@
 import mongoose from 'mongoose';
 
+const imageSchema = mongoose.Schema({
+    name: { type: String, required: true, unique: true },
+    data: {type: Buffer, required: true},
+    contentType: {type: String, required: true}
+})
+
 export const statusSchema = mongoose.Schema({
-    order: { type: Number, require: true, unique: true },
-    name: { type: String, require: true, unique: true }
+    order: { type: Number, required: true, unique: true },
+    name: { type: String, required: true, unique: true }
 })
 
 export const appSchema = mongoose.Schema({
-    name: { type: String, require: true, unique: true },
-    displayName: { type: String, require: true}
+    name: { type: String, required: true, unique: true },
+    displayName: { type: String, required: true},
+    image: { type: imageSchema, required: true }
 })
 
 export const AppModel = mongoose.model('apps', appSchema);
