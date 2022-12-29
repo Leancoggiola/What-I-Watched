@@ -1,6 +1,18 @@
+@import './colors';
 // Variables
-$bg-default: #1a1a24;
-$color-default: #ffffff;
-$icon-color-default: #ffffff;
-$header-bg-default: #3a3a4a;
-$navbar-bg-default: #3a3a4a;
+$bg-default: $black;
+$color-default: $white;
+$icon-color-default: $white;
+
+$header-bg-default: $grey-450;
+$navbar-bg-default: $grey-450;
+
+$login-bg-default: $grey-600;
+$border-color-default: $grey-500;
+$border-hover-default: $grey-500;
+
+$btn-primary-color-bg-default: $yellow;
+$btn-primary-color-default: $black;
+
+$btn-primary-hover-bg-default: $grey-200;
+$btn-primary-hover-default: $grey-200;

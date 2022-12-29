@@ -6,4 +6,30 @@ body {
     background-color: var(--body-bg);
     color: var(--body-color);
     margin: 0;
+    button {
+        background-color: var(--btn-primary-color-bg);
+        border-color: var(--btn-primary-color-bg);
+        color: var(--btn-primary-color);
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 6rem;
+        padding: 0.5rem;
+
+        text-align: center;
+        text-decoration: none;
+
+        border-radius: 0;
+        border-style: solid;
+        border-width: 1px;
+
+        cursor: pointer;
+        overflow: visible;
+        position: relative;
+        &:hover, &:focus {
+            background-color: var(--btn-primary-hover-bg);
+            border-color: var(--btn-primary-hover-bg);
+        }
+    }
 }

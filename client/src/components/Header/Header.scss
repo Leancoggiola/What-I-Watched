@@ -1,8 +1,8 @@
 header {
     position: fixed;
     display: grid; 
-    grid-template-columns: var(--vertical-nav-collapse-width) min-content 50%;
-    grid-template-areas: 'Menu Title Search'; 
+    grid-template-columns: var(--vertical-nav-collapse-width) min-content 50% min-content;
+    grid-template-areas: 'Menu Title Search Profile'; 
     align-items: center;
     gap: 0 2rem; 
     width: 100%;
@@ -43,5 +43,8 @@ header {
         position: absolute;
         width: 100%;
         left: calc(50%)
+    }
+    .header-search {
+        grid-area: Profile;
     }
 }

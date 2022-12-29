@@ -1,0 +1,11 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    &-trigger {
+        white-space: nowrap;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+    }
+}

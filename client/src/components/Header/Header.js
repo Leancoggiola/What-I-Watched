@@ -7,7 +7,7 @@ import { ReactComponent as MenuIcon } from '../../assets/menu-icon.svg'
 import './Header.scss'
 
 const Header = (props) => {
-    const { search: SearchBar} = props;
+    const { search: SearchBar, profileMenu: ProfileMenu} = props;
     const [ isCollapse, setToggleNavBar] = useState(true)
 
     return (
@@ -18,6 +18,7 @@ const Header = (props) => {
                 </div>
                 <div className='header-title'><h1>What I Saw App</h1></div>
                 <div className='header-search'><SearchBar/></div>
+                <div className='header-profile'><ProfileMenu /></div>
             </header>
             <Navbar isCollapse={isCollapse}/>
         </>

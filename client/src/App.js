@@ -1,28 +1,28 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+// Pages
+import Login from './Pages/Login';
+import Home from './Pages/Home';
 
 // Components 
 import Theme from './components/Theme';
-import Header from './components/Header';
-import SearchBar from './components/SearchBar';
-// Middleware
-import { getAppsRequest } from './middleware/actions/appsActions';
 
 // Styles
 import './App.scss'
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAppsRequest())
-  }, [])
 
   return (
     <>
       <Theme variant='default'/>
-      <Header search={SearchBar}/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home />}/>
+          <Route path='/login' element={<Login/>}/>
+        </Routes>
+      </BrowserRouter>
+      
     </>
   );
 }
