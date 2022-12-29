@@ -1,6 +1,7 @@
 import { put, takeLeading, delay} from 'redux-saga/effects';
 import { Auth0TokenProvider } from '../../config/auth';
 
+import { getRequest } from '../index.js';
 import { isUserLoggedInFailure, isUserLoggedInSuccess, isUserLoggedInRequest } from '../actions/authActions';
 
 import { GET_USER_LOGGED } from '../constants/auth';
@@ -22,8 +23,7 @@ function getCookie(cname) {
 }
 
 // Workers
-function* isUserLoggedIn(action) {
-    yield put(isUserLoggedInRequest());
+function* isUserLoggedInWork(action) {
     try {
         yield delay(2000);
         const auth0TokenProvider = Auth0TokenProvider();
@@ -48,6 +48,13 @@ function* isUserLoggedIn(action) {
     }
 }
 
+function* isUserLoggedInWatch() {
+    yield takeLeading(
+        getRequest(GET_USER_LOGGED),
+        isUserLoggedInWork
+    )
+}
+
 export const authSaga = [
-    takeLeading(GET_USER_LOGGED, isUserLoggedIn)
+    isUserLoggedInWatch()
 ]
