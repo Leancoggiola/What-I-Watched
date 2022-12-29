@@ -50,6 +50,7 @@ export const putChangeStatus = async (req, res) => {
 export const getAppList = async (req, res) => {
     try {
         AppModel.find()
+            .select('name displayName image -_id')
             .then(appList => res.status(200).json(appList))
             .catch(err => res.status(400).json({ message: err.message }))
     } catch(e) {

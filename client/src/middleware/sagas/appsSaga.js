@@ -19,7 +19,7 @@ import { APP_GET_APPS_LIST } from '../constants/metadata';
 function* getAppsWork() {
     try {
         const options = {
-            url: '/meta/getAppList',
+            url: 'http://localhost:3001/meta/getAppList',
             method: 'GET'
         }
         const response = yield call(serviceCall, options)

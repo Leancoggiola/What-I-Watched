@@ -1,4 +1,4 @@
-import * as axios from 'axios';
+import axios from 'axios';
 
 export function serviceCall(requestConfig) {
     const instance = axios.create();

@@ -88,5 +88,6 @@ export const appsReducer = (state = initialState, action) => {
                 crud: { loading: true, data: null, error: payload }
             }
         }
+        default: return state;
     }
 }
