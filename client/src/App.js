@@ -8,8 +8,6 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 // Middleware
 import { getAppsRequest } from './middleware/actions/appsActions';
-// Assets
-import { ReactComponent as AppIcon } from './assets/app-icon.svg';
 
 // Styles
 import './App.scss'
@@ -24,7 +22,7 @@ function App() {
   return (
     <>
       <Theme variant='default'/>
-      <Header logo={AppIcon} search={SearchBar}/>
+      <Header search={SearchBar}/>
     </>
   );
 }

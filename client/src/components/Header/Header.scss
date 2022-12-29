@@ -1,38 +1,34 @@
 header {
     position: fixed;
     display: grid; 
-    grid-template-columns: 4rem repeat(2, min-content) 50%;
-    grid-template-areas: 'Menu Title Logo Search'; 
+    grid-template-columns: var(--vertical-nav-collapse-width) min-content 50%;
+    grid-template-areas: 'Menu Title Search'; 
     align-items: center;
     gap: 0 2rem; 
     width: 100%;
-    min-height: 4rem;
+    min-height: var(--header-width);
     z-index: 100;
     top: 0;
-    background-color: var(--header-primary-color);
+    background-color: var(--header-bg-color);
 
     .header-menu {
         grid-area: Menu;
         display: flex;
         justify-content: center;
         align-items: flex-end;
+        width: 100%;
         height: 100%;
         button {
+            width: 100%;
+            height: 100%;
             background: transparent;
             border: none;
+            cursor: pointer;
             svg {
                 stroke: var(--icon-color);
                 height: 2rem;
                 width: 2rem;
             }
-        }
-    }
-
-    .header-logo {
-        grid-area: Logo;
-        svg {
-            height: 3.75rem;
-            width: 3.75rem;
         }
     }
     .header-title {
@@ -46,6 +42,6 @@ header {
         grid-area: Search;
         position: absolute;
         width: 100%;
-        left: calc(50% - 7rem)
+        left: calc(50%)
     }
 }
