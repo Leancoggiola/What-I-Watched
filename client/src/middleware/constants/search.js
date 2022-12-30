@@ -1,0 +1,1 @@
+export const GET_CONTENT_SEARCH = 'GET_CONTENT_SEARCH';

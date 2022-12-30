@@ -8,6 +8,6 @@ export function serviceCall(requestConfig) {
             return response && response.data
         })
         .catch(error => {
-            return Promise.reject(error.response)
+            return Promise.reject(error.message)
         })
 }

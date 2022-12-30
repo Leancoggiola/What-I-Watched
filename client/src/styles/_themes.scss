@@ -10,6 +10,9 @@
     --header-search-bg:#{$bg-default};
     --header-search-color:#{$color-default};
 
+    --search-suggestion-list:#{$search-suggestion-list-default};
+    --search-suggestion-list-border:#{$search-suggestion-list-border-default};
+
     --navbar-bg:#{$navbar-bg-default};
     --login-bg: #{$login-bg-default};
 
@@ -19,7 +22,6 @@
     --btn-primary-hover-bg: #{$btn-primary-hover-bg-default};
     --btn-primary-hover: #{$btn-primary-hover-default};
 
-    --progress-loader-bg: #{$progress-loader-bg-default};
     --progress-loader-square-color: #{$progress-loader-square-color-default};
 
     --dropdown-bg: #{$dropdown-bg-default};

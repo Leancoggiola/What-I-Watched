@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 // Components
 import Navbar from '../Navbar'
 // Styling
@@ -9,7 +9,7 @@ const Header = (props) => {
     const [ isCollapse, setToggleNavBar] = useState(true)
 
     return (
-        <>
+        <Fragment>
             <header>
                 <div className='header-menu'>
                     <button type='button' onClick={() => setToggleNavBar(!isCollapse)}></button>
@@ -19,7 +19,7 @@ const Header = (props) => {
                 <div className='header-profile'><ProfileMenu /></div>
             </header>
             <Navbar isCollapse={isCollapse}/>
-        </>
+        </Fragment>
 
     )
 }

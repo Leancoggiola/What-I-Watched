@@ -4,7 +4,7 @@ const { pick } = lodash;
 
 const defaultOptions = {
     url: 'https://online-movie-database.p.rapidapi.com',
-    params: {limit: '5', titleType: 'tvEpisode,movie'},
+    params: {limit: '5', titleType: 'tvSeries,movie'},
     headers: {
       'X-RapidAPI-Key': '11797de419msh557864eba0d9d55p112880jsn82c94a8b6dd7', // Replace later
       'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com'
@@ -23,9 +23,9 @@ export const getContent = async (req, res) => {
         }
     
         const {status, data} =  await axios.request(options);
-        const resBody = data?.results.map(item => 
+        const resBody = data?.results ? data.results.map(item => 
             (pick(item, ['id', 'title', 'image', 'titleType'])
-        ));
+        )) : [];
 
         res.status(status).send(resBody)
     } catch(e) {

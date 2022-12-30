@@ -3,6 +3,6 @@ const router = express.Router();
 
 import { getContent } from './controller.js';
 
-router.use('/getContent', getContent)
+router.get('/getContent', getContent)
 
 export default router;

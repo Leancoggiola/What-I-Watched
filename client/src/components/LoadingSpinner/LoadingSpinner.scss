@@ -1,12 +1,12 @@
 .progress-loader-pos-relative {
-    position: relative;
+    position: relative!important;
 }
 .progress-loader-container {
     position: absolute;
     z-index: 2;
     top: 0;
     left: 0;
-    background-color: var( --progress-loader-bg);
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
