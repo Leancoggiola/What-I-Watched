@@ -51,7 +51,7 @@ const Dropdown = forwardRef((props, ref) => {
             <div className='dropdown-menu' 
                     style={{ 
                         display: openDropdown ? 'block':'none', 
-                        top: dropUp ? -(dropdown.current.getBoundingClientRect().height + 20) / 14 + "rem" : '100%'
+                        top: dropUp ? -(dropdown.current.getBoundingClientRect().height + 20) / 14 + 'rem' : '100%'
                     }}
                     id={id}
                     role='menu'

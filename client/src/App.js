@@ -1,16 +1,17 @@
-import React, { useCallback, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useCallback, useEffect, Suspense } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from 'lodash';
 import { useAuth0 } from '@auth0/auth0-react';
 
 // Pages
-import Login from './Pages/Login';
-import Home from './Pages/Home';
-import LoadingSpinner from './components/LoadingSpinner'
+import Login from './pages/Login';
 
 // Components 
 import Theme from './components/Theme';
+import BaseRoute from './components/BaseRoute';
+import InprogressFallback from './components/InprogressFallback';
+import ErrorFallback from './components/ErrorFallback';
+import { ErrorBoundary } from 'react-error-boundary';
 
 // Middleware
 import { isUserLoggedInRequest } from './middleware/actions/authActions'
@@ -22,11 +23,11 @@ function App() {
   const dispatch = useDispatch()
   const { loginWithRedirect } = useAuth0();
 
-  const { loading, data, error } = useSelector((state) => state.auth)
+  const loggedUser = useSelector((state) => state.auth)
 
-  const isUserLoggedIn = useCallback(() => {
-    dispatch(isUserLoggedInRequest({ loginWithRedirect }))
-  })
+  const isUserLoggedIn = useCallback(
+    () => dispatch(isUserLoggedInRequest({ loginWithRedirect }))[dispatch]
+  )
 
   const verifyUserLoggedIn = useCallback( async () => {
     await isUserLoggedIn()
@@ -42,35 +43,28 @@ function App() {
     }
   }, [])
 
-  const getRoutes = () => {
-    if(!isEmpty(data)) {
-      return(
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='*' element={<Home />}/>
-        </Routes>)
-    } else {
-      return(
-        <Routes>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='*' element={<Login />}/>
-        </Routes>
-      )
-    }
+  if(window.location.pathname == '/login') {
+    return <Login />
   }
-
-  if(loading) {
-    return <LoadingSpinner />
+  if(!loggedUser.data) {
+    return <InprogressFallback status={'Preparando la Aplicacion'}/>
   }
 
   return (
-    <>
-      <Theme variant='default'/>
+    <ErrorBoundary 
+      fallbackRender={({error, resetErrorBoundary}) => (
+        <ErrorFallback error={error }resetErrorBoundary={resetErrorBoundary} />
+      )}  
+    >
       <BrowserRouter>
-        {getRoutes()}
+        <Theme variant='default'/>
+          <Suspense fallback={
+            <InprogressFallback status={'Autentificando Usuario'}/>
+          }>
+            <BaseRoute />
+          </Suspense>
       </BrowserRouter>
-      
-    </>
+    </ErrorBoundary>
   );
 }
 

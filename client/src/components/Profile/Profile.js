@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 // Components
 import { GrLogout } from 'react-icons/gr';
 import Avatar from '../Avatar';
@@ -12,7 +12,7 @@ const Profile = () => {
 
     const [ isProfileMenuOpen, setProfileMenuOpen ] = useState(false);
     const { user, logout } = useAuth0();
-    const navigate = useNavigate()
+    const history = useHistory()
 
     const userMail = user?.email ? user.email.split(/[.@]/) : '';
     const userId = userMail[0] + ' ' + userMail[1];
@@ -21,7 +21,7 @@ const Profile = () => {
         localStorage.clear()
         sessionStorage.clear()
         logout({ returnTo: window.location.origin + '/login', localOnly: true})
-        navigate('/login')
+        history.push('/login')
         return;
     }
 

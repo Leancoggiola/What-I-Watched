@@ -13,12 +13,12 @@
         padding: 0 2rem;
         &::placeholder { color: var(--header-search-color) }
     }
-    button {
+    .icon-btn {
         position: absolute;
         height: 100%;
         right: 5%;
         border: none;
-        background-color: var(--header-search-bg);
+        background-color: transparent;
         svg { 
             fill: var(--icon-color);
             height: 65%;

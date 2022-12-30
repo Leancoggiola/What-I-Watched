@@ -8,7 +8,7 @@ const Login = () => {
             <div className='login-card'>
                 <h1>Bienvenido a What I Saw</h1>
                 <p>Una plataforma para hacer seguimiento de peliculas y series</p>
-                <button type='submit' onClick={() => window.location.href = '/'}>Login</button>
+                <button type='submit' className='btn' onClick={() => window.location.href = '/'}>Login</button>
             </div>
         </div>
     )
