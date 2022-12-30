@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // Components
-import { GrLogout } from 'react-icons/gr';
+import { IoIosLogOut } from 'react-icons/io';
 import Avatar from '../Avatar';
 import { Dropdown, DropdownItem} from '../Dropdown';
 // Middleware
@@ -28,7 +28,7 @@ const Profile = () => {
     const profileMenuOptions=[{
             id: 'header-profile-logout',
             optionFn: logoutUser,
-            icon: <GrLogout/>,
+            icon: <IoIosLogOut/>,
             description: 'Logout'
     }]
 
@@ -49,7 +49,7 @@ const Profile = () => {
                 const { id, optionFn, icon, description } = menuOption;
                 return(
                     <DropdownItem key={id} onClick={() => { setProfileMenuOpen(false); optionFn()}}>
-                        <span>{icon}</span>
+                        <span className='icon'>{icon}</span>
                         <span>{description}</span>
                     </DropdownItem>
                 )

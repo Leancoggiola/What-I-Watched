@@ -24,7 +24,6 @@ const getCookie = (cname) => {
 // Workers
 function* isUserLoggedInWork(action) {
     const { payload: { loginWithRedirect } } = action;
-    yield put(isUserLoggedInRequest());
     try {
         yield delay(2000)
         const isAuthenticatedCookieSet = getCookie(`auth0.eACG1Ww9RQSOzODzyWu37HR0GalgYGsN.is.authenticated`);
@@ -39,5 +38,5 @@ function* isUserLoggedInWork(action) {
 }
 
 export const authSaga = [
-    takeLatest(GET_LOGGED_USER, isUserLoggedInWork)
+    takeLatest(getRequest(GET_LOGGED_USER), isUserLoggedInWork)
 ]

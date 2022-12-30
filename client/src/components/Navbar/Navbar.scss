@@ -7,6 +7,7 @@
     height: calc(100vh - 4rem);
     z-index: 100;
     background-color: var(--navbar-bg);
+    border-right: 1px solid var(--body-bg);
 
     &-collapse {
         width: var(--vertical-nav-collapse-width);

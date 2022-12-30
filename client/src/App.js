@@ -1,6 +1,7 @@
 import React, { useEffect, Suspense } from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Components 
 import Theme from './components/Theme';
@@ -14,23 +15,20 @@ import Login from './pages/Login';
 // Middleware
 import { GET_LOGGED_USER } from './middleware/constants/auth';
 import { getAppsRequest } from './middleware/actions/appsActions';
+import { isUserLoggedInRequest } from './middleware/actions/authActions';
 
 // Styles
 import './App.scss'
-import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.auth)
   const appList = useSelector((state) => state.apps.list)
 
   useEffect(() => {
     if(window.location.pathname != '/login' && window.navigator.onLine) {
-      dispatch({
-        type: GET_LOGGED_USER,
-        payload: { loginWithRedirect }
-      })
+      dispatch(isUserLoggedInRequest({ loginWithRedirect }))
     }
     return () => {
       localStorage.clear()
@@ -51,6 +49,10 @@ function App() {
         <Login />
       </React.Fragment>
     )
+  }
+
+  if(!isAuthenticated) {
+    return (<InprogressFallback status={'Autenticando Usuario'}/>)
   }
 
   if(!loggedUser.data || !appList.data) {
