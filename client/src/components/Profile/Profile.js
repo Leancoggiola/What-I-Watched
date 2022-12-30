@@ -1,28 +1,28 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
 // Components
 import { GrLogout } from 'react-icons/gr';
 import Avatar from '../Avatar';
 import { Dropdown, DropdownItem} from '../Dropdown';
+// Middleware
+import { logOutUserRequest } from '../../middleware/actions/authActions';
 // Styling
-import './Profile.scss'
+import './Profile.scss';
 
 const Profile = () => {
 
     const [ isProfileMenuOpen, setProfileMenuOpen ] = useState(false);
     const { user, logout } = useAuth0();
-    const history = useHistory()
+    const dispatch = useDispatch()
 
     const userMail = user?.email ? user.email.split(/[.@]/) : '';
     const userId = userMail[0] + ' ' + userMail[1];
 
     const logoutUser = () => {
-        localStorage.clear()
-        sessionStorage.clear()
+        dispatch(logOutUserRequest())
         logout({ returnTo: window.location.origin + '/login', localOnly: true})
-        history.push('/login')
-        return;
+        window.location.href = '/login'
     }
 
     const profileMenuOptions=[{

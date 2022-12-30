@@ -1,47 +1,47 @@
 import { getFailure, getSuccess, getRequest} from '../index.js';
 
-import { GET_USER_LOGGED, GET_USER_LOGOUT } from '../constants/auth';
+import { GET_LOGGED_USER, GET_LOGOUT_USER } from '../constants/auth';
 
-// GET USER LOGGED
+// IS USER LOGGED
 export const isUserLoggedInRequest = (payload) => {
     return {
-        type: getRequest(GET_USER_LOGGED),
+        type: getRequest(GET_LOGGED_USER),
         payload
     }
 }
 
 export const isUserLoggedInSuccess = (payload) => {
     return {
-        type: getSuccess(GET_USER_LOGGED),
+        type: getSuccess(GET_LOGGED_USER),
         payload
     }
 }
 
 export const isUserLoggedInFailure = (payload) => {
     return {
-        type: getFailure(GET_USER_LOGGED),
+        type: getFailure(GET_LOGGED_USER),
         payload
     }
 }
 
-// GET USER LOGOUT
-export const logOutRequest = (payload) => {
+// LOG OUT USER
+export const logOutUserRequest = (payload) => {
     return {
-        type: getRequest(GET_USER_LOGOUT),
+        type: getRequest(GET_LOGOUT_USER),
         payload
     }
 }
 
-export const logOutSuccess = (payload) => {
+export const logOutUserSuccess = (payload) => {
     return {
-        type: getSuccess(GET_USER_LOGOUT),
+        type: getSuccess(GET_LOGOUT_USER),
         payload
     }
 }
 
-export const logOutFailure = (payload) => {
+export const logOutUserFailure = (payload) => {
     return {
-        type: getFailure(GET_USER_LOGOUT),
+        type: getFailure(GET_LOGOUT_USER),
         payload
     }
 }

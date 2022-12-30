@@ -1,10 +1,6 @@
-import React, { useCallback, useEffect, Suspense } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, Suspense } from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-
-// Pages
-import Login from './pages/Login';
 
 // Components 
 import Theme from './components/Theme';
@@ -12,42 +8,53 @@ import BaseRoute from './components/BaseRoute';
 import InprogressFallback from './components/InprogressFallback';
 import ErrorFallback from './components/ErrorFallback';
 import { ErrorBoundary } from 'react-error-boundary';
+// Pages
+import Login from './pages/Login';
 
 // Middleware
-import { isUserLoggedInRequest } from './middleware/actions/authActions'
+import { GET_LOGGED_USER } from './middleware/constants/auth';
+import { getAppsRequest } from './middleware/actions/appsActions';
 
 // Styles
 import './App.scss'
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
-  const dispatch = useDispatch()
   const { loginWithRedirect } = useAuth0();
-
+  const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.auth)
-
-  const isUserLoggedIn = useCallback(
-    () => dispatch(isUserLoggedInRequest({ loginWithRedirect }))[dispatch]
-  )
-
-  const verifyUserLoggedIn = useCallback( async () => {
-    await isUserLoggedIn()
-  })
+  const appList = useSelector((state) => state.apps.list)
 
   useEffect(() => {
     if(window.location.pathname != '/login' && window.navigator.onLine) {
-      verifyUserLoggedIn();
+      dispatch({
+        type: GET_LOGGED_USER,
+        payload: { loginWithRedirect }
+      })
     }
     return () => {
       localStorage.clear()
       sessionStorage.clear()
     }
   }, [])
+  
+  useEffect(() => {
+    if(loggedUser.data && !loggedUser.loading && !loggedUser.error) {
+      dispatch(getAppsRequest())
+    }
+  }, [loggedUser])
 
   if(window.location.pathname == '/login') {
-    return <Login />
+    return(
+      <React.Fragment>
+        <Theme variant='default'/>
+        <Login />
+      </React.Fragment>
+    )
   }
-  if(!loggedUser.data) {
-    return <InprogressFallback status={'Preparando la Aplicacion'}/>
+
+  if(!loggedUser.data || !appList.data) {
+    return (<InprogressFallback status={'Preparando la aplicacion'}/>)
   }
 
   return (
@@ -59,7 +66,7 @@ function App() {
       <BrowserRouter>
         <Theme variant='default'/>
           <Suspense fallback={
-            <InprogressFallback status={'Autentificando Usuario'}/>
+            <InprogressFallback status={'Autenticando Usuario'}/>
           }>
             <BaseRoute />
           </Suspense>

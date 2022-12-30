@@ -1,22 +1,20 @@
-import { put, takeLeading, delay} from 'redux-saga/effects';
-import { Auth0TokenProvider } from '../../config/auth';
+import { put, call, takeLatest, delay} from 'redux-saga/effects';
 
 import { getRequest } from '../index.js';
-import { isUserLoggedInFailure, isUserLoggedInSuccess, isUserLoggedInRequest } from '../actions/authActions';
+import { isUserLoggedInSuccess, isUserLoggedInFailure, isUserLoggedInRequest } from '../actions/authActions';
 
-import { GET_USER_LOGGED } from '../constants/auth';
+import { GET_LOGGED_USER } from '../constants/auth';
 
-
-function getCookie(cname) {
+const getCookie = (cname) => {
     const name = cname + '=';
-    const decodedCookie = decodeURIComponent(document.cookie)
-    const ca = decodedCookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';')
+    for(let i=0; i < ca.length; i++) {
         let c = ca[i];
-        while(c.charAt(0) === ' ') {
-            c = c.substring(1);
+        while(c.charAt(0)== ' ') {
+            c = c.substring(1)
         }
-        if(c.indexOf(name) === 0) {
+        if(c.indexOf(name) == 0) {
             return c.substring(name.length, c.length)
         }
     }
@@ -25,37 +23,21 @@ function getCookie(cname) {
 
 // Workers
 function* isUserLoggedInWork(action) {
+    const { payload: { loginWithRedirect } } = action;
+    yield put(isUserLoggedInRequest());
     try {
-        yield delay(2000);
-        const auth0TokenProvider = Auth0TokenProvider();
+        yield delay(2000)
         const isAuthenticatedCookieSet = getCookie(`auth0.eACG1Ww9RQSOzODzyWu37HR0GalgYGsN.is.authenticated`);
-        const loginWithRedirect = action.payload.loginWithRedirect;
-        const userDetails = auth0TokenProvider.getUserDetails();
         if(isAuthenticatedCookieSet) {
-            if(userDetails) {
-                yield put(isUserLoggedInSuccess(userDetails))
-                return userDetails;
-            } else {
-                loginWithRedirect({ appState: { returnTo: window.location.href }})
-                return;
-            }
-        } else if (!isAuthenticatedCookieSet) {
-            loginWithRedirect({ appState: { returnTo: window.location.href }})
-            return;
+            yield put(isUserLoggedInSuccess(true));
+        } else {
+            loginWithRedirect({ appState: { returnTo: window.location.href }});
         }
     } catch (e) {
         yield put(isUserLoggedInFailure(e));
-        return e;
     }
 }
 
-function* isUserLoggedInWatch() {
-    yield takeLeading(
-        getRequest(GET_USER_LOGGED),
-        isUserLoggedInWork
-    )
-}
-
 export const authSaga = [
-    isUserLoggedInWatch()
+    takeLatest(GET_LOGGED_USER, isUserLoggedInWork)
 ]
