@@ -44,11 +44,11 @@ const Dropdown = forwardRef((props, ref) => {
     }
 
     return(
-        <div ref={target} className={`dropdown ${className}`}>
-            <div className='dropdown-trigger'>
+        <div ref={target} className={`cc-dropdown ${className}`}>
+            <div className='cc-dropdown-trigger'>
                 {triggerButton}
             </div>
-            <div className='dropdown-menu' 
+            <div className='cc-dropdown-menu' 
                     style={{ 
                         display: openDropdown ? 'block':'none', 
                         top: dropUp ? -(dropdown.current.getBoundingClientRect().height + 20) / 14 + 'rem' : '100%'
@@ -73,7 +73,7 @@ const DropdownItem = (props) => {
     }, [currentItem])
 
     return(
-        <button ref={menuItemRef} role='menuitem' className='dropdown-item' tabIndex='-1' onClick={() => onClick()}>
+        <button ref={menuItemRef} role='menuitem' className='cc-dropdown-item' tabIndex='-1' onClick={() => onClick()}>
             {children}
         </button>
     )

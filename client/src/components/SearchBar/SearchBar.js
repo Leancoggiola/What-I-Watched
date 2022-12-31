@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { HiSearch } from 'react-icons/hi';
+//import { HiSearch } from 'react-icons/hi';
 import { useSelector, useDispatch } from 'react-redux';
 // Components
 import SuggestionList from './SuggestionList';
@@ -50,7 +50,7 @@ const SearchBar = () => {
                     value={displayValue}
                     onChange={(e) => setDisplayValue(e.target.value)}
                 />
-                <button type='submit' className='icon-btn'><HiSearch/></button>
+                <button type='submit' className='icon-btn'></button>
             </div>
             {isSuggestListOpen && (
                 <SuggestionList 

@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Components 
-import Theme from './components/Theme';
+import Theme from './commonComponents/Theme';
 import BaseRoute from './components/BaseRoute';
 import InprogressFallback from './components/InprogressFallback';
 import ErrorFallback from './components/ErrorFallback';

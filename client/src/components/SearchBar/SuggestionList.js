@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 import { forwardRef, useEffect, useRef } from 'react';
 // Components
-import LoadingSpinner from '../LoadingSpinner';
+import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 // Styling
 import './SearchBar.scss'
 

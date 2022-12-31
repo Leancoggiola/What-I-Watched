@@ -2,9 +2,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // Components
-import { IoIosLogOut } from 'react-icons/io';
-import Avatar from '../Avatar';
-import { Dropdown, DropdownItem} from '../Dropdown';
+//import { IoIosLogOut } from 'react-icons/io';
+import Avatar from '../../commonComponents/Avatar';
+import { Dropdown, DropdownItem} from '../../commonComponents/Dropdown';
 // Middleware
 import { logOutUserRequest } from '../../middleware/actions/authActions';
 // Styling
@@ -28,7 +28,7 @@ const Profile = () => {
     const profileMenuOptions=[{
             id: 'header-profile-logout',
             optionFn: logoutUser,
-            icon: <IoIosLogOut/>,
+            icon: "",
             description: 'Logout'
     }]
 

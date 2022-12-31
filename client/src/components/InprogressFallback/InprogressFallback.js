@@ -1,7 +1,7 @@
 import { Fragment, memo } from 'react';
 // Components
-import Theme from '../Theme';
-import LoadingSpinner from '../LoadingSpinner';
+import Theme from '../../commonComponents/Theme';
+import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 // Styling
 import './InprogressFallback.scss'
 
