@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 // Components
 import Avatar from '../../commonComponents/Avatar';
 import { Dropdown, DropdownItem} from '../../commonComponents/Dropdown';
-import IconButton from '../../commonComponents/IconButton';
 import Icon from '../../commonComponents/Icon'
 ;
 import { actionIcExitApp } from '../../assets/icons';
@@ -52,9 +51,7 @@ const Profile = () => {
                 const { id, optionFn, icon, description } = menuOption;
                 return(
                     <DropdownItem key={id} onClick={() => { setProfileMenuOpen(false); optionFn()}}>
-                        <IconButton type='button' onClick={() => setToggleNavBar(!isCollapse)} >
-                            <Icon src={icon} />
-                        </IconButton>
+                        <Icon src={icon} />
                         <span>{description}</span>
                     </DropdownItem>
                 )
