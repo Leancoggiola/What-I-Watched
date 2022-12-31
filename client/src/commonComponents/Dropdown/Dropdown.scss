@@ -1,6 +1,7 @@
 .cc-dropdown {
     position: relative;
     display: inline-block;
+    cursor: pointer;
     &-trigger {
         white-space: nowrap;
         cursor: pointer;
@@ -23,6 +24,7 @@
         bottom: auto;
     }
     &-item {
+        cursor: pointer;
         display: flex;
         gap: 1rem;
         color: var(--dropdown-color);

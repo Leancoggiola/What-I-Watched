@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-//import { HiSearch } from 'react-icons/hi';
 import { useSelector, useDispatch } from 'react-redux';
 // Components
 import SuggestionList from './SuggestionList';
+import IconButton from '../../commonComponents/IconButton';
+import Icon from '../../commonComponents/Icon';
+
+import { actionIcSearch } from '../../assets/icons';
 // Middleware
 import { getContentSearchRequest } from '../../middleware/actions/searchActions';
 // Styling
@@ -50,7 +53,9 @@ const SearchBar = () => {
                     value={displayValue}
                     onChange={(e) => setDisplayValue(e.target.value)}
                 />
-                <button type='submit' className='icon-btn'></button>
+                <IconButton type='button' className={'search-icon-btn'} onClick={() => setToggleNavBar(!isCollapse)} >
+                    <Icon src={actionIcSearch} />
+                </IconButton>
             </div>
             {isSuggestListOpen && (
                 <SuggestionList 

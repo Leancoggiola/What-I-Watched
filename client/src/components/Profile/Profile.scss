@@ -3,14 +3,10 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    .icon {
-        display: block;
-        height: 100%;
-        width: auto;
-        background-color: transparent;
-        svg {
-            height: 100%;
-            width: auto;
-        }
+    &:hover {
+        background-color: var(--btn-icon-hover-bg);
+    }
+    &:focus {
+        background-color: var(--btn-icon-focus-bg);
     }
 }

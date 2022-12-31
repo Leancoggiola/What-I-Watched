@@ -2,9 +2,12 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 // Components
-//import { IoIosLogOut } from 'react-icons/io';
 import Avatar from '../../commonComponents/Avatar';
 import { Dropdown, DropdownItem} from '../../commonComponents/Dropdown';
+import IconButton from '../../commonComponents/IconButton';
+import Icon from '../../commonComponents/Icon'
+;
+import { actionIcExitApp } from '../../assets/icons';
 // Middleware
 import { logOutUserRequest } from '../../middleware/actions/authActions';
 // Styling
@@ -28,7 +31,7 @@ const Profile = () => {
     const profileMenuOptions=[{
             id: 'header-profile-logout',
             optionFn: logoutUser,
-            icon: "",
+            icon: actionIcExitApp,
             description: 'Logout'
     }]
 
@@ -49,7 +52,9 @@ const Profile = () => {
                 const { id, optionFn, icon, description } = menuOption;
                 return(
                     <DropdownItem key={id} onClick={() => { setProfileMenuOpen(false); optionFn()}}>
-                        <span className='icon'>{icon}</span>
+                        <IconButton type='button' onClick={() => setToggleNavBar(!isCollapse)} >
+                            <Icon src={icon} />
+                        </IconButton>
                         <span>{description}</span>
                     </DropdownItem>
                 )

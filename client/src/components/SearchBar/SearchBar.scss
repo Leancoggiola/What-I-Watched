@@ -15,14 +15,14 @@
             border: none;
             margin: 0;
             padding: 0;
-            color: var(--app-bg);
+            color: var(--app-color);
             background-color: var(--app-bg);
             padding-left: 2rem;
             &::placeholder { 
-                color: var(--app-bg);
+                color: var(--app-color);
             }
         }
-        .icon-btn {
+        .search-icon-btn {
             position: absolute;
             height: 100%;
             top: 0;
