@@ -2,6 +2,9 @@ import { createContext, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import FocusTrap from 'focus-trap-react';
 import { navigationIcClose } from '../../assets/icons';
+// Components
+import IconButton from '../IconButton';
+import Icon from '../Icon';
 // Styling
 import './Modal.scss';
 
@@ -10,6 +13,7 @@ const ModalProvider = ModalContext.Provider;
 
 const Modal = (props) => {
     const { children, className, show, onClose } = props;
+    const classes = `cc-modal-dialog-container ${className ? className: ''}`;
     
     const closeModal = () => {
         onClose()
@@ -23,9 +27,9 @@ const Modal = (props) => {
     return (
         <ModalProvider value={closeModal}>
             <Portal>
-                <div className='modal-overlay'>
+                <div className='cc-modal'>
                     <FocusTrap active={true} paused={false} focusTrapOptions={{}}>
-                        <div role='dialog' className={`modal-dialog-container ${className ? className: ''}`}>
+                        <div role='dialog' className={classes}>
                             {children}
                         </div>
                     </FocusTrap>
@@ -36,22 +40,23 @@ const Modal = (props) => {
 }
 
 const ModalHeader = (props) => {
-    const { children, className, closeModalButton, closeButtomProps } = props;
+    const { children, className, closeModalButton } = props;
     const modal = useContext(ModalContext)
+    const classes = `cc-modal-header ${className ? className: ''}`;
 
     const handleClick = (e) => {
         modal.closeModal();
     }
 
     return (
-        <div className={`modal-header ${className ? className: ''}`}>
-            <h3 className='modal-header-headline'>{children}</h3>
+        <div className={classes}>
+            <h3 className='cc-modal-header-headline'>{children}</h3>
             {closeModalButton ? 
             <div>{closeModalButton}</div>
             :
-            <button type='button' onClick={handleClick} className='modal-header-icon-btn' {...closeButtomProps}>
-                BUTON HERE
-            </button>}
+            <IconButton type='button' onClick={handleClick} >
+                <Icon src={navigationIcClose} />
+            </IconButton>}
         </div>
     )
 }
@@ -60,7 +65,7 @@ const ModalBody = (props) => {
     const { children, className } = props;
 
     return (
-        <div className={`modal-body ${className ? className: ''}`}>
+        <div className={`cc-modal-body ${className ? className: ''}`}>
             {children}
         </div>
     )
@@ -70,7 +75,7 @@ const ModalFooter = (props) => {
     const { children, className } = props;
 
     return (
-        <div className={`modal-footer ${className ? className: ''}`}>
+        <div className={`cc-modal-footer ${className ? className: ''}`}>
             {children}
         </div>
     )

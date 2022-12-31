@@ -1,22 +1,28 @@
 @import './customVariables';
 
+// Default variables
+body {
+    --vertical-nav-collapse-width: 5rem;
+    --vertical-nav-expanded-width: 18rem;
+    --header-width: 4rem;
+    --avatar-size: 2.5rem;
+    --search-suggestion-item-height: 3rem;
+
+    --easy-in-out-fast: 150ms ease-in-out;
+    --easy-in-out-expo: cubic-bezier(1,0,0,1);
+}
+
 .theme-default {
-    --body-bg: #{$bg-default};
-    --body-color: #{$color-default};
+    // App variables
+    --app-bg: #{$app-bg-default};
+    --app-submenu-bg: #{$app-submenu-bg-default};
+    --app-color: #{$color-default};
 
-    --icon-color: #{$icon-color-default};
+    --navigation-bg: #{$navigation-bg-default};
 
-    --header-bg-color: #{$header-bg-default};
-    --header-search-bg:#{$bg-default};
-    --header-search-color:#{$color-default};
-
-    --search-suggestion-list:#{$search-suggestion-list-default};
-    --search-suggestion-list-border:#{$search-suggestion-list-border-default};
-
-    --navbar-bg:#{$navbar-bg-default};
-    --login-bg: #{$login-bg-default};
-
+    --icon-color: #{$color-default};
     --border-color: #{$border-color-default};
+
     --btn-primary-color-bg: #{$btn-primary-color-bg-default};
     --btn-primary-color: #{$btn-primary-color-default};
     --btn-primary-hover-bg: #{$btn-primary-hover-bg-default};

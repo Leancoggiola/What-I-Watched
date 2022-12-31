@@ -44,7 +44,7 @@ const Dropdown = forwardRef((props, ref) => {
     }
 
     return(
-        <div ref={target} className={`cc-dropdown ${className}`}>
+        <div ref={target} className={`cc-dropdown ${className ? className : ''}`}>
             <div className='cc-dropdown-trigger'>
                 {triggerButton}
             </div>

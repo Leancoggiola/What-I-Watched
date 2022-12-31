@@ -6,8 +6,8 @@
     bottom: 0;
     height: calc(100vh - 4rem);
     z-index: 100;
-    background-color: var(--navbar-bg);
-    border-right: 1px solid var(--body-bg);
+    background-color: var(--navigation-bg);
+    border-right: 1px solid var(--app-bg);
 
     &-collapse {
         width: var(--vertical-nav-collapse-width);
@@ -51,12 +51,12 @@
                 height: 3rem;
                 width: 3rem;
                 border-radius: 10%;
-                box-shadow: 0 0 .5rem .5rem var(--body-bg);
+                box-shadow: 0 0 .5rem .5rem var(--app-bg);
             }
         }
         &.active {
             color: white;
-            background-color: var(--body-bg);
+            background-color: var(--app-bg);
             &:before {
                 content: '';
                 display: block;
@@ -64,11 +64,11 @@
                 height: 100%;
                 position: absolute;
                 z-index: 1;
-                background: var(--body-color);
+                background: var(--app-color);
             }
         }
         &:hover {
-            background-color: var(--body-bg);
+            background-color: var(--app-bg);
         }
     }
 }

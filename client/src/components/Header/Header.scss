@@ -10,7 +10,7 @@ header {
     min-height: var(--header-width);
     z-index: 100;
     top: 0;
-    background-color: var(--header-bg-color);
+    background-color: var(--navigation-bg);
 
     .header-menu {
         grid-area: Menu;

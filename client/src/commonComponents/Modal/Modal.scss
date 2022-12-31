@@ -1,0 +1,33 @@
+.cc-modal {
+
+    &-body {
+        padding: 1.25rem;
+        display: block;
+        overflow: auto;
+        flex: 1;
+    }
+
+    &-footer {
+        display: flex;
+        flex-direction: row;
+        padding: 1.25rem;
+        border-top: 1px solid var(--border-color);
+
+        button {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        button + button {
+            margin-top: 0.75rem;
+        }
+    }
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 1.25rem;
+        min-height: 3.75rem;
+    }
+}

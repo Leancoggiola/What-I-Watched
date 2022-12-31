@@ -1,15 +1,11 @@
 @import './colors';
 // Variables
-$bg-default: $black;
+$app-bg-default: $black;
+$app-submenu-bg-default: $grey-600;
 $color-default: $white;
-$icon-color-default: $white;
 
-$header-bg-default: $grey-550;
-$navbar-bg-default: $grey-550;
-$search-suggestion-list-default: $grey-600;
-$search-suggestion-list-border-default: $grey-450;
+$navigation-bg-default: $grey-550;
 
-$login-bg-default: $grey-600;
 $border-color-default: $grey-500;
 $border-hover-default: $grey-500;
 

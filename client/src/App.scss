@@ -3,8 +3,8 @@
 @import './styles/index.scss';
 
 body {
-    background-color: var(--body-bg);
-    color: var(--body-color);
+    background-color: var(--app-bg);
+    color: var(--app-color);
     margin: 0;
     .btn {
         background-color: var(--btn-primary-color-bg);
