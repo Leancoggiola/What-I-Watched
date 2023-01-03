@@ -5,7 +5,7 @@ import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 // Styling
 import './SearchBar.scss'
 
-const SuggestionList = forwardRef((props) => {
+const SuggestionList = forwardRef((props, ref) => {
     const { clickOutside, loading, data, showResultInfo } = props;
     const target = useRef(null)
 

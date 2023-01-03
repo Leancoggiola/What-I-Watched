@@ -1,7 +1,8 @@
 // Styling
+import { forwardRef } from 'react';
 import './Avatar.scss'
 
-const Avatar = (props) => {
+const Avatar = forwardRef((props,ref) => {
     const { name, onClick, user } = props;
 
     const initials = 
@@ -23,6 +24,6 @@ const Avatar = (props) => {
             }
         </div>
     )
-}
+})
 
 export default Avatar;
