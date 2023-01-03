@@ -2,7 +2,7 @@
 import './Avatar.scss'
 
 const Avatar = (props) => {
-    const { name, onClick } = props;
+    const { name, onClick, user } = props;
 
     const initials = 
         name.match(/(\b\S)?/g)
@@ -14,9 +14,13 @@ const Avatar = (props) => {
 
     return(
         <div className='cc-avatar' onClick={() => onClick()}>
+            { user?.picture ?
+            <img src={user.picture} alt={initials} />
+            :
             <div className='cc-avatar-initials'>
                 <span>{initials}</span>
             </div>
+            }
         </div>
     )
 }

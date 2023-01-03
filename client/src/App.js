@@ -23,7 +23,7 @@ import './App.scss'
 function App() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
-  const loggedUser = useSelector((state) => state.auth)
+  const loggedUser = useSelector((state) => state.auth.auth0)
   const appList = useSelector((state) => state.apps.list)
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function App() {
   return (
     <ErrorBoundary 
       fallbackRender={({error, resetErrorBoundary}) => (
-        <ErrorFallback error={error }resetErrorBoundary={resetErrorBoundary} />
+        <ErrorFallback error={error}resetErrorBoundary={resetErrorBoundary} />
       )}  
     >
       <BrowserRouter>

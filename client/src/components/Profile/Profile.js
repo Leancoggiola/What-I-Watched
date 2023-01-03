@@ -44,6 +44,7 @@ const Profile = () => {
                 <Avatar 
                     onClick={() => setProfileMenuOpen(!isProfileMenuOpen)}
                     name={userId}
+                    user={user}
                 />
             }
         >

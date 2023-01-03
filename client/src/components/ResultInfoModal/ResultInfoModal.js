@@ -73,7 +73,7 @@ const ResultInfoModal = (props) => {
     }
     
     return (
-        <Modal show={true} onClose={onClose}>
+        <Modal show={false} onClose={onClose}>
             <ModalHeader>{item?.title}</ModalHeader>
             <ModalBody>
                 {getBodyContent()}
