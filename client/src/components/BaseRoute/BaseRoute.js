@@ -1,6 +1,5 @@
 import { lazy } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Route, Switch, Redirect } from 'react-router-dom';
 // Components
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
@@ -13,28 +12,16 @@ const BaseRoute = () => {
   return(
     <div>
       <Header search={SearchBar} profileMenu={Profile} />      
-      <Routes>
-          <Route exact path='/' element={<Home />}/>
-          <Route path='*' element={<Navigate to='/' replace/>}/> 
-      </Routes>
+      <Switch>
+        <Route 
+          path='/' 
+          component={Home}
+          exact
+        />
+        <Route path='*'><Redirect to='/'/></Route> 
+      </Switch>
     </div>
   )
-}
-
-const ProtectedRoute = (props) => {
-  const {
-    component: Component,
-    render,
-    permission,
-    fallbackPath,
-    noAccessProps,
-    ...restProps
-  } = props
-  
-const { data: permissions = [], loading } = useSelector();
-
-if(loading) return null
-
 }
 
 export default BaseRoute;

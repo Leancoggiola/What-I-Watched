@@ -7,7 +7,7 @@ const IconButton = (props) => {
     const classes = `cc-icon-btn ${className ? className : ''}`;
 
     return (
-        <Fragment>
+        <>
             {href ?
             <a className={classes}>{children}</a>
             :
@@ -15,7 +15,7 @@ const IconButton = (props) => {
                 {children}
             </button>
             }
-        </Fragment>
+        </>
     )
 }
 

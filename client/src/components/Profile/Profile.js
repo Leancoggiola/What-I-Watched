@@ -1,12 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // Components
-import Avatar from '../../commonComponents/Avatar';
-import { Dropdown, DropdownItem} from '../../commonComponents/Dropdown';
-import Icon from '../../commonComponents/Icon'
-;
 import { actionIcExitApp } from '../../assets/icons';
+import Avatar from '../../commonComponents/Avatar';
+import { Dropdown, DropdownItem } from '../../commonComponents/Dropdown';
+import Icon from '../../commonComponents/Icon';
 // Middleware
 import { logOutUserRequest } from '../../middleware/actions/authActions';
 // Styling
@@ -17,6 +17,7 @@ const Profile = () => {
     const [ isProfileMenuOpen, setProfileMenuOpen ] = useState(false);
     const { user, logout } = useAuth0();
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const userMail = user?.email ? user.email.split(/[.@]/) : '';
     const userId = userMail[0] + ' ' + userMail[1];
@@ -24,7 +25,8 @@ const Profile = () => {
     const logoutUser = () => {
         dispatch(logOutUserRequest())
         logout({ returnTo: window.location.origin + '/login', localOnly: true})
-        window.location.href = '/login'
+        history.push('/login')
+        return
     }
 
     const profileMenuOptions=[{

@@ -1,14 +1,15 @@
-import React, { useEffect, Suspense } from 'react';
-import { BrowserRouter, Route} from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { isEmpty } from 'lodash';
+import React, { Suspense, useEffect } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 // Components 
 import Theme from './commonComponents/Theme';
 import BaseRoute from './components/BaseRoute';
-import InprogressFallback from './components/InprogressFallback';
 import ErrorFallback from './components/ErrorFallback';
-import { ErrorBoundary } from 'react-error-boundary';
+import InprogressFallback from './components/InprogressFallback';
 // Pages
 import Login from './pages/Login';
 
@@ -17,12 +18,12 @@ import { getAppsRequest } from './middleware/actions/appsActions';
 import { isUserLoggedInRequest } from './middleware/actions/authActions';
 
 // Styles
-import './App.scss'
+import './App.scss';
 
-export default props => {
+export default () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
-  const loggedUser = useSelector((state) => state.auth.auth0)
+  const loggedUser = useSelector((state) => state.auth)
   const appList = useSelector((state) => state.apps.list)
 
   useEffect(() => {
@@ -37,41 +38,29 @@ export default props => {
   
   useEffect(() => {
     if(loggedUser.data && !loggedUser.loading && !loggedUser.error) {
-      dispatch(getAppsRequest())
+      isEmpty(appList.data && !appList.loading) && dispatch(getAppsRequest())
     }
   }, [loggedUser])
 
-  if(window.location.pathname == '/login') {
-    return(
-      <>
-        <Theme variant='default'/>
-        <Login />
-      </>
-    )
-  }
-
-  if(!isAuthenticated) {
-    return (<InprogressFallback status={'Autenticando Usuario'}/>)
-  }
-
-  if(!loggedUser.data || !appList.data) {
-    return <InprogressFallback status={'Preparando la aplicacion'}/>
-  }
-
   return (
-    <ErrorBoundary 
-      fallbackRender={({error, resetErrorBoundary}) => (
-        <ErrorFallback error={error}resetErrorBoundary={resetErrorBoundary} />
-      )}  
-    >
-      <BrowserRouter>
-        <Theme variant='default'/>
-          <Suspense fallback={
-              <InprogressFallback status={'Autenticando Usuario'}/>
-            }>
-              <BaseRoute />
-          </Suspense>
-      </BrowserRouter>
-    </ErrorBoundary>
+    <div>
+      <ErrorBoundary 
+        fallbackRender={({error, resetErrorBoundary}) => (
+          <ErrorFallback error={error}resetErrorBoundary={resetErrorBoundary} />
+        )}  
+      >
+        <BrowserRouter>
+          <Theme variant='default'/>
+            <Suspense fallback={
+                <InprogressFallback status={'Autenticando Usuario'}/>
+              }>
+                {window.location.pathname == '/login' ? <Login />:
+                !loggedUser.data || !appList.data ? <InprogressFallback status={'Preparando la aplicacion'}/> :
+                !isAuthenticated ? <InprogressFallback status={'Autenticando Usuario'}/> :
+                <BaseRoute />}
+            </Suspense>
+        </BrowserRouter>
+      </ErrorBoundary>
+    </div>
   );
 }

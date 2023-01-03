@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Components
 import SuggestionList from './SuggestionList';
@@ -50,7 +50,7 @@ const SearchBar = () => {
     }
 
     return (
-        <Fragment>
+        <>
             <div className='search-bar-container'>
                 <div className='search-bar-input-wrapper'>
                     <input 
@@ -74,7 +74,7 @@ const SearchBar = () => {
                 )}
             </div>
             <ResultInfoModal {...itemInfo} onClose={() => setItemInfo({ show: false, item: null})}/>
-        </Fragment>
+        </>
     )
 }
 

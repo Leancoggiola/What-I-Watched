@@ -33,4 +33,10 @@ body {
             border-color: var(--btn-primary-hover-bg);
         }
     }
+    .page {
+        margin-left: 5rem;
+        margin-top: 4rem;
+        padding: 4rem;
+        min-height: calc(100vh - 4rem - 8rem);
+    }
 }

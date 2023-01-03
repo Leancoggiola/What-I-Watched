@@ -58,4 +58,9 @@ body {
     --form-element-border: #{$form-element-border-default};
     --form-element-disabled-color: #{$form-element-disabled-color-default};
     --form-element-disabled-border: #{$form-element-disabled-border-default};
+
+    --card-bg: #{$card-bg-default};
+    --card-box-shadow-color-hover: #{$card-box-shadow-color-hover-default};
+    --card-border-color: #{$card-border-color-default};
+    --card-footer-bg: #{$card-footer-bg-default};
 }

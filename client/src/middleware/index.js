@@ -5,5 +5,5 @@ export const getSuccess = type => {
     return `${type}_SUCCESS`;
 }
 export const getFailure = type => {
-    return `${type}_Failure`;
+    return `${type}_FAILURE`;
 }

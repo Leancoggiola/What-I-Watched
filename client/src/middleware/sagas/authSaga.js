@@ -1,9 +1,9 @@
-import { put, call, takeLatest, delay} from 'redux-saga/effects';
+import { delay, put, takeLatest } from 'redux-saga/effects';
 
+import { isUserLoggedInFailure, isUserLoggedInSuccess } from '../actions/authActions';
 import { getRequest } from '../index.js';
-import { isUserLoggedInSuccess, isUserLoggedInFailure, getPermissionFailure, getPermissionSuccess } from '../actions/authActions';
 
-import { GET_LOGGED_USER, GET_PERMISSION_LIST } from '../constants/auth';
+import { GET_LOGGED_USER } from '../constants/auth';
 
 const getCookie = (cname) => {
     const name = cname + '=';
@@ -19,16 +19,6 @@ const getCookie = (cname) => {
         }
     }
     return '';
-}
-
-const getUserDetails = () => {
-    let data = '';
-    try {
-        data = JSON.parse(localStorage.getItem('@@auth0spajs@@::' + 'eACG1Ww9RQSOzODzyWu37HR0GalgYGsN' + '::default::openid profile email'))
-    } catch (e) {
-        throw new Error(e)
-    }
-    return data?.body?.decodedToken?.user?.email ? data.body.decodedToken.user.email : '';
 }
 
 // Workers
@@ -47,22 +37,6 @@ function* isUserLoggedInWork(action) {
     }
 }
 
-function* getPermissionListWork() {
-    try {
-        const options = {
-            url: 'http://localhost:3001/auth/getPermissionList',
-            method: 'GET',
-            params: {
-                user: getUserDetails(),
-            }
-        }
-        const response = yield call(serviceCall, options)
-        yield put(getPermissionSuccess(response));
-    } catch (e) {
-        yield put(getPermissionFailure(e));
-    }
-}
-
 // Watchers
 function* isUserLoggedInWatch() {
     yield takeLatest(
@@ -71,14 +45,6 @@ function* isUserLoggedInWatch() {
     )
 }
 
-function* getPermissionListWatch() {
-    yield takeLatest(
-        getRequest(GET_PERMISSION_LIST),
-        getPermissionListWork
-    )
-}
-
 export const authSaga = [
-    isUserLoggedInWatch(),
-    getPermissionListWatch()
+    isUserLoggedInWatch()
 ]
