@@ -3,10 +3,15 @@
 $app-bg-default: $black;
 $app-submenu-bg-default: $grey-600;
 $color-default: $white;
+$highlight-default: $yellow;
+$disabled-default: $grey-400;
 
 $navigation-bg-default: $grey-550;
 
+$modal-overlay-bg-default: $black-with-opacity;
+
 $border-color-default: $grey-500;
+$border-color-navigation-default: $grey-600;
 $border-hover-default: $grey-500;
 
 $btn-primary-color-bg-default: $yellow;
@@ -24,3 +29,14 @@ $progress-loader-square-color-default: $yellow;
 
 $dropdown-bg-default: $grey-550;
 $dropdown-color-default: $white;
+
+$chip-bg-default: $white;
+$chip-color-default: $grey-500;
+$chip-monochrome-bg-default: $white;
+$chip-monochrome-color-default: $grey-500;
+
+$form-element-bg-default: $grey-600;
+$form-element-hover-default: $grey-550;
+$form-element-border-default: $grey-200;
+$form-element-disabled-color-default: $grey-400;
+$form-element-disabled-border-default: $grey-450;

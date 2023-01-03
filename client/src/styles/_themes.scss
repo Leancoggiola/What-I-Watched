@@ -10,6 +10,10 @@ body {
 
     --easy-in-out-fast: 150ms ease-in-out;
     --easy-in-out-expo: cubic-bezier(1,0,0,1);
+
+    --error: #F95D54;
+    --warning: #ED6500;
+    --success: #57E188;
 }
 
 .theme-default {
@@ -17,11 +21,14 @@ body {
     --app-bg: #{$app-bg-default};
     --app-submenu-bg: #{$app-submenu-bg-default};
     --app-color: #{$color-default};
+    --app-highlight: #{$highlight-default};
+    --disabled: #{$disabled-default};
 
     --navigation-bg: #{$navigation-bg-default};
 
     --icon-color: #{$color-default};
     --border-color: #{$border-color-default};
+    --border-color-navigation : #{$border-color-navigation-default};
 
     --btn-primary-color-bg: #{$btn-primary-color-bg-default};
     --btn-primary-color: #{$btn-primary-color-default};
@@ -38,4 +45,17 @@ body {
 
     --dropdown-bg: #{$dropdown-bg-default};
     --dropdown-color: #{$dropdown-color-default};
+
+    --modal-overlay-bg: #{$modal-overlay-bg-default};
+
+    --chip-bg: #{$chip-bg-default};
+    --chip-color: #{$chip-color-default};
+    --chip-monochrome-bg: #{$chip-monochrome-bg-default};
+    --chip-monochrome-color: #{$chip-monochrome-color-default};
+
+    --form-element-bg: #{$form-element-bg-default};
+    --form-element-hover: #{$form-element-hover-default};
+    --form-element-border: #{$form-element-border-default};
+    --form-element-disabled-color: #{$form-element-disabled-color-default};
+    --form-element-disabled-border: #{$form-element-disabled-border-default};
 }

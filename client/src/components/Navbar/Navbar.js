@@ -10,7 +10,7 @@ import './Navbar.scss'
 
 const Navbar = ({isCollapse}) => {
     const [ activeIndex, setActiveIndex] = useState(0);
-    const { loading, data, error } = useSelector((state) => state.apps.list);
+    const { data } = useSelector((state) => state.apps.list);
 
     const handleClick = (index) => {
         setActiveIndex(index);

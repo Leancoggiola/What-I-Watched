@@ -1,0 +1,15 @@
+.cc-label {
+    color: var(--app-color);
+    font-size: 1rem;
+    font-weight: lighter;
+    line-height: 1.50rem;
+    width: calc(100% - 1.125rem);
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+    transition: 200ms ease all;
+    padding-bottom: 0.375rem;
+    &-disabled {
+        color: var(--disabled);
+    }
+}

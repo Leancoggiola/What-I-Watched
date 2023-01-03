@@ -1,10 +1,15 @@
 import { put, call, takeLatest} from 'redux-saga/effects';
 
 import { getRequest } from '../index.js';
-import { getContentSearchFailure, getContentSearchSuccess } from '../actions/searchActions';
+import { 
+    getContentSearchFailure, 
+    getContentSearchSuccess,
+    getOverviewDetailsFailure,
+    getOverviewDetailsSuccess
+} from '../actions/searchActions';
 import { serviceCall } from '../../config/serviceCall.js'
 
-import { GET_CONTENT_SEARCH } from '../constants/search';
+import { GET_CONTENT_SEARCH, GET_CONTENT_DETAILS } from '../constants/search';
 
 // Workers
 function* getContentSearchWork(action) {
@@ -24,6 +29,24 @@ function* getContentSearchWork(action) {
     }
 }
 
+function* getOverviewDetailsWork(action) {
+    const { payload } = action;
+    try {
+        const options = {
+            url: 'http://localhost:3001/imdb/getOverviewDetails',
+            method: 'GET',
+            params: {
+                tconst: payload,
+                currentCountry: 'ES'
+            }
+        }
+        const response = yield call(serviceCall, options)
+        yield put(getOverviewDetailsSuccess(response));
+    } catch (e) {
+        yield put(getOverviewDetailsFailure(e));
+    }
+}
+
 // Watchers
 function* getContentSearchWatch() {
     yield takeLatest(
@@ -32,6 +55,14 @@ function* getContentSearchWatch() {
     )
 }
 
+function* getOverviewDetailsWatch() {
+    yield takeLatest(
+        getRequest(GET_CONTENT_DETAILS),
+        getOverviewDetailsWork
+    )
+}
+
 export const searchSaga = [
-    getContentSearchWatch()
+    getContentSearchWatch(),
+    getOverviewDetailsWatch()
 ]

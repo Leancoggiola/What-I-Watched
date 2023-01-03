@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Components
 import SuggestionList from './SuggestionList';
+import ResultInfoModal from '../ResultInfoModal';
 import IconButton from '../../commonComponents/IconButton';
 import Icon from '../../commonComponents/Icon';
 
@@ -14,10 +15,11 @@ import './SearchBar.scss'
 const SearchBar = () => {
     const [ searchWord, setSearchWord ] = useState("");
     const [ displayValue, setDisplayValue ] = useState("");
+    const [ itemInfo, setItemInfo ] = useState({ show: false, item: null});
     const [ isSuggestListOpen, setSuggestListOpen ] = useState(false);
 
     const dispatch = useDispatch();
-    const searchState = useSelector((state) => state.search);
+    const searchState = useSelector((state) => state.search.resultsList);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -43,28 +45,36 @@ const SearchBar = () => {
         }
     }
 
+    const showResultInfo = (item) => {
+        setItemInfo({ show: true, item})
+    }
+
     return (
-        <div className='search-bar-container'>
-            <div className='search-bar-input-wrapper'>
-                <input 
-                    type='text' 
-                    placeholder='Busca series y peliculas..' 
-                    maxLength={50} 
-                    value={displayValue}
-                    onChange={(e) => setDisplayValue(e.target.value)}
-                />
-                <IconButton type='button' className={'search-icon-btn'} onClick={() => setToggleNavBar(!isCollapse)} >
-                    <Icon src={actionIcSearch} />
-                </IconButton>
+        <Fragment>
+            <div className='search-bar-container'>
+                <div className='search-bar-input-wrapper'>
+                    <input 
+                        type='text' 
+                        placeholder='Busca series y peliculas..' 
+                        maxLength={50} 
+                        value={displayValue}
+                        onChange={(e) => setDisplayValue(e.target.value)}
+                    />
+                    <IconButton type='button' className={'search-icon-btn'} onClick={() => setToggleNavBar(!isCollapse)} >
+                        <Icon src={actionIcSearch} />
+                    </IconButton>
+                </div>
+                {isSuggestListOpen && (
+                    <SuggestionList 
+                        clickOutside={clickOutside}
+                        loading={searchState.loading}
+                        data={searchState.data}
+                        showResultInfo={showResultInfo}
+                    />
+                )}
             </div>
-            {isSuggestListOpen && (
-                <SuggestionList 
-                    clickOutside={clickOutside}
-                    loading={searchState.loading}
-                    data={searchState.data}
-                />
-            )}
-        </div>
+            <ResultInfoModal {...itemInfo} onClose={() => setItemInfo({ show: false, item: null})}/>
+        </Fragment>
     )
 }
 

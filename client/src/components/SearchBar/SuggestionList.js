@@ -6,7 +6,7 @@ import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 import './SearchBar.scss'
 
 const SuggestionList = forwardRef((props) => {
-    const { clickOutside, loading, data } = props;
+    const { clickOutside, loading, data, showResultInfo } = props;
     const target = useRef(null)
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const SuggestionList = forwardRef((props) => {
             !isEmpty(data) ? 
                 <div className='search-bar-result-container'>
                     {data.map((item) => (
-                        <div className='search-bar-result-item' key={item.id}>
+                        <div className='search-bar-result-item' key={item.id} onClick={() => showResultInfo(item)}>
                             <span>{item.title}</span>
                             <span>{item.titleType}</span>
                         </div>
