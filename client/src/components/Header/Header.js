@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 // Components
 import IconButton from '../../commonComponents/IconButton';
 import Icon from '../../commonComponents/Icon';
@@ -13,7 +13,7 @@ const Header = (props) => {
     const [ isCollapse, setToggleNavBar] = useState(true)
 
     return (
-        <Fragment>
+        <>
             <header>
                 <div className='header-menu'>
                     <IconButton type='button' onClick={() => setToggleNavBar(!isCollapse)} >
@@ -25,7 +25,7 @@ const Header = (props) => {
                 <div className='header-profile'><ProfileMenu /></div>
             </header>
             <Navbar isCollapse={isCollapse}/>
-        </Fragment>
+        </>
 
     )
 }

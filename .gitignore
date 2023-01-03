@@ -12,3 +12,5 @@ node_modules/
 
 # rest testing file
 testing.http
+
+package-lock.json

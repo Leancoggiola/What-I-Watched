@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react';
+import { memo } from 'react';
 // Components
 import Theme from '../../commonComponents/Theme';
 import LoadingSpinner from '../../commonComponents/LoadingSpinner';
@@ -8,11 +8,11 @@ import './InprogressFallback.scss'
 
 const InprogressFallback = memo((props) => {
     return(
-        <Fragment>
+        <>
             <Theme variant='default' />
             <LoadingSpinner fullscreen={true} />
             <div className='inprogress-text'>{props.status}</div>
-        </Fragment>
+        </>
     )
 })
 

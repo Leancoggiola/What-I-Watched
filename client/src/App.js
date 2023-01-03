@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense } from 'react';
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter, Route} from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,14 +13,13 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Login from './pages/Login';
 
 // Middleware
-import { GET_LOGGED_USER } from './middleware/constants/auth';
 import { getAppsRequest } from './middleware/actions/appsActions';
 import { isUserLoggedInRequest } from './middleware/actions/authActions';
 
 // Styles
 import './App.scss'
 
-function App() {
+export default props => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.auth.auth0)
@@ -44,10 +43,10 @@ function App() {
 
   if(window.location.pathname == '/login') {
     return(
-      <React.Fragment>
+      <>
         <Theme variant='default'/>
         <Login />
-      </React.Fragment>
+      </>
     )
   }
 
@@ -56,7 +55,7 @@ function App() {
   }
 
   if(!loggedUser.data || !appList.data) {
-    return (<InprogressFallback status={'Preparando la aplicacion'}/>)
+    return <InprogressFallback status={'Preparando la aplicacion'}/>
   }
 
   return (
@@ -68,13 +67,11 @@ function App() {
       <BrowserRouter>
         <Theme variant='default'/>
           <Suspense fallback={
-            <InprogressFallback status={'Autenticando Usuario'}/>
-          }>
-            <BaseRoute />
+              <InprogressFallback status={'Autenticando Usuario'}/>
+            }>
+              <BaseRoute />
           </Suspense>
       </BrowserRouter>
     </ErrorBoundary>
   );
 }
-
-export default App;
