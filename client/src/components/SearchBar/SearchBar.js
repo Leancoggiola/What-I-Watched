@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { returnIfContentInList } from '../../utils';
+import { isEmpty } from 'lodash';
 // Components
 import SuggestionList from './SuggestionList';
 import ResultInfoModal from '../ResultInfoModal';
@@ -17,9 +19,11 @@ const SearchBar = () => {
     const [ displayValue, setDisplayValue ] = useState("");
     const [ itemInfo, setItemInfo ] = useState({ show: false, item: null});
     const [ isSuggestListOpen, setSuggestListOpen ] = useState(false);
+    const [ suggestionsList, setSuggestions ] = useState([])
 
     const dispatch = useDispatch();
     const searchState = useSelector((state) => state.search.resultsList);
+    const userList = useSelector((state) => state.list.userList);
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -38,6 +42,19 @@ const SearchBar = () => {
             setSuggestListOpen(false)
         }
     }, [searchWord])
+
+    useEffect(() => {
+        if(!isEmpty(searchState.data)) {
+            setSuggestions(searchState.data.map(item => {
+                const itemOnList = returnIfContentInList(item, userList.data)
+                return({
+                    ...item, 
+                    status: itemOnList ? itemOnList.status : null,
+                    inList: !!itemOnList
+                })
+            }))
+        }
+    }, [searchState.data])
 
     const clickOutside = (event, target) => {
         if(event?.target && target?.current && !target.current.contains(event.target)) {
@@ -68,7 +85,7 @@ const SearchBar = () => {
                     <SuggestionList 
                         clickOutside={clickOutside}
                         loading={searchState.loading}
-                        data={searchState.data}
+                        data={suggestionsList}
                         showResultInfo={showResultInfo}
                     />
                 )}

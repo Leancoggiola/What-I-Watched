@@ -1,12 +1,11 @@
-import { useEffect, useLayoutEffect, useState, useContext } from 'react';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import FocusTrap from 'focus-trap-react';
 import { ModalContext, ModalProvider } from '../contexts';
 
 // Components
-import IconButton from '../IconButton';
-import Icon from '../Icon';
 import { navigationIcClose } from '../../assets/icons';
+import Icon from '../Icon';
+import IconButton from '../IconButton';
 // Styling
 import './Modal.scss';
 
@@ -28,11 +27,9 @@ const Modal = (props) => {
         <ModalProvider value={{closeModal}}>
             {show && <Portal>
                 <div className='cc-modal'>
-                    <FocusTrap active={true} paused={false} focusTrapOptions={{preventScroll: true}} >
-                        <div role='dialog' className={classes}>
-                            {children}
-                        </div>
-                    </FocusTrap>
+                    <div role='dialog' className={classes}>
+                        {children}
+                    </div>
                 </div>
             </Portal>}
         </ModalProvider>

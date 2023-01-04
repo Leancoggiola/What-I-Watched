@@ -1,12 +1,14 @@
 import { all } from 'redux-saga/effects';
-import { appsSaga } from './appsSaga';
 import { authSaga } from './authSaga';
+import { metaSaga } from './metaSaga';
 import { searchSaga } from './searchSaga';
+import { listSaga } from './listSaga';
 
 export default function* rootSagas() {
     yield all([
-        ...appsSaga,
+        ...metaSaga,
         ...authSaga,
-        ...searchSaga
+        ...searchSaga,
+        ...listSaga
     ])
 }

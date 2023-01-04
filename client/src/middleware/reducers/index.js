@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import { appsReducer } from './appsReducer';
 import { authReducer } from './authReducer';
+import { listReducer } from './listReducer';
+import { metaReducer } from './metaReducer';
 import { searchReducer } from './searchReducer';
 
 const rootReducer = combineReducers({
-    apps: appsReducer,
+    list: listReducer,
+    meta: metaReducer,
     auth: authReducer,
     search: searchReducer
 })

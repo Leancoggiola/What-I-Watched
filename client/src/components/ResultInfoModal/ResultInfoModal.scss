@@ -48,3 +48,16 @@
         }
     }
 }
+
+.overview-footer {
+    justify-content: flex-end;
+    min-height: 3rem;
+    &-btn {
+        padding: 1rem!important;
+        font-weight: bolder;
+        
+        &-remove {
+            background-color: var(--error);
+        }
+    }
+}

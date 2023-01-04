@@ -1,23 +1,27 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 // Components
-import FormField from '../../commonComponents/FormField'
+import FormField from '../../commonComponents/FormField';
 import Icon from '../../commonComponents/Icon';
 import IconButton from '../../commonComponents/IconButton';
 import Label from '../../commonComponents/Label';
-import { Select, Option} from '../../commonComponents/Select';
+import { Option, Select } from '../../commonComponents/Select';
 
 import { navigationIcCheck, navigationIcClose } from '../../assets/icons';
 // Styling
 import './AddItemForm.scss';
 
 const AddItemForm = (props) => {
-    const { onSubmit, onCancel } = props;
-    const [ status, setStatus ] = useState();
-    const [ app, setApp ] = useState();
+    const { setShowAddItemForm, handleSubmit } = props;
+    const [ status, setStatus ] = useState('');
+    const [ app, setApp ] = useState('');
 
-    const { data } = useSelector((state) => state.apps.list);
+    const appList = useSelector((state) => state.meta.appList)
+    const statusList = useSelector((state) => state.meta.statusList)
 
+    const onSubmit = () => {
+        handleSubmit( app, status)
+    }
 
     return (
         <div className='add-item'>
@@ -25,19 +29,29 @@ const AddItemForm = (props) => {
                 <FormField>
                     <Label>Aplicacion</Label>
                     <Select value={app} onChange={(e) => setApp(e)} required={true} >
-                        {data.map(option => (
-                                <Option value={option.displayName} key={option.name} >
-                                    {option.displayName}
-                                </Option>
+                        {appList.data.map(option => (
+                            <Option value={option.name} key={option.name} >
+                                {option.displayName}
+                            </Option>
+                        ))}
+                    </Select>
+                </FormField>
+                <FormField>
+                    <Label>Status</Label>
+                    <Select value={status} onChange={(e) => setStatus(e)} required={true}>
+                        {statusList.data.map(option => (
+                            <Option value={option.name} key={option.name} >
+                                {option.name}
+                            </Option>
                         ))}
                     </Select>
                 </FormField>
             </form>
             <div className='add-item-footer'>
-                    <IconButton className='add-item-footer-btn'>
+                    <IconButton className='add-item-footer-btn' onClick={onSubmit} disabled={!app || !status}>
                         <Icon src={navigationIcCheck} />
                     </IconButton>
-                    <IconButton className='add-item-footer-btn'>
+                    <IconButton className='add-item-footer-btn' onClick={() => setShowAddItemForm(false)}>
                         <Icon src={navigationIcClose} />
                     </IconButton>
             </div>

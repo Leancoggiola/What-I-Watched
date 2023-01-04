@@ -54,7 +54,7 @@ export const getOverviewDetails = async (req, res) => {
                 releaseYear: data?.title?.year,
                 rating: data?.ratings?.rating,
                 genres: data?.genres,
-                summary: data?.plotSummary?.text
+                summary: data?.plotSummary?.text ? data.plotSummary.text : data?.plotOutline?.text
             }
             res.status(status).send(resBody)
         } else throw new Error(`No se encontro el contenido con id ${query.tconst}`)

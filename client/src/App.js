@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { isEmpty } from 'lodash';
-import React, { Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,8 +14,8 @@ import InprogressFallback from './components/InprogressFallback';
 import Login from './pages/Login';
 
 // Middleware
-import { getAppsRequest } from './middleware/actions/appsActions';
 import { isUserLoggedInRequest } from './middleware/actions/authActions';
+import { getAppsRequest, getStatusRequest } from './middleware/actions/metaActions';
 
 // Styles
 import './App.scss';
@@ -24,7 +24,8 @@ export default () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.auth)
-  const appList = useSelector((state) => state.apps.list)
+  const appList = useSelector((state) => state.meta.appList)
+  const statusList = useSelector((state) => state.meta.statusList)
 
   useEffect(() => {
     if(window.location.pathname != '/login' && window.navigator.onLine) {
@@ -39,6 +40,7 @@ export default () => {
   useEffect(() => {
     if(loggedUser.data && !loggedUser.loading && !loggedUser.error) {
       isEmpty(appList.data && !appList.loading) && dispatch(getAppsRequest())
+      isEmpty(statusList.data && !statusList.loading) && dispatch(getStatusRequest())
     }
   }, [loggedUser])
 
@@ -55,7 +57,7 @@ export default () => {
                 <InprogressFallback status={'Autenticando Usuario'}/>
               }>
                 {window.location.pathname == '/login' ? <Login />:
-                !loggedUser.data || !appList.data ? <InprogressFallback status={'Preparando la aplicacion'}/> :
+                !loggedUser.data || !appList.data || !statusList.data ? <InprogressFallback status={'Preparando la aplicacion'}/> :
                 !isAuthenticated ? <InprogressFallback status={'Autenticando Usuario'}/> :
                 <BaseRoute />}
             </Suspense>

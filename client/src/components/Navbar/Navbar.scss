@@ -30,6 +30,7 @@
         background: transparent;
         color: var(--navbar-color);
         border: none;
+        transition: background-color 200ms ease-in;
 
         h2 {
             width: 100%;
@@ -38,6 +39,7 @@
             white-space: nowrap;
             flex-grow: 1;
             text-align: left;
+            font-size: large;
         }
         .icon-container {
             width: var(--vertical-nav-collapse-width);

@@ -58,16 +58,29 @@
             margin: 0 2rem;
             overflow-y: auto;
             .search-bar-result-item {
-                display: flex;
-                justify-content: space-between;
+                display: grid;
+                grid-auto-flow: column;
+                grid-template-columns: repeat(2, max-content) 1fr;
+                gap: 1.5rem;
                 align-items: center;
-                height: var(--search-suggestion-item-height);;
+                height: var(--search-suggestion-item-height);
                 border-bottom: 1px solid var(--border-color);
+
                 span {
                     font-size: 1rem;
-                    font-weight: bold;
                     text-transform: capitalize;
+                    padding-right: 0.75rem;
+                    &:first-child {
+                        border-right: 1px solid var(--border-color);
+                    }
                 }
+
+                & > div {
+                    font-size: 0.75rem;
+                    margin-left: auto; 
+                    margin-right: 0;
+                }
+
                 &:last-child {
                     border: none;
                 }

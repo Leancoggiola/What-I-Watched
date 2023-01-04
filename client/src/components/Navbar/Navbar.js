@@ -1,16 +1,16 @@
+import { Buffer } from 'buffer';
+import { isEmpty } from 'lodash';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { isEmpty } from 'lodash';
-import { Buffer } from 'buffer';
 // Assets
 import allAppsLogo from '../../assets/all-apps-icon.png';
 // Styling
-import './Navbar.scss'
+import './Navbar.scss';
 
 
 const Navbar = ({isCollapse}) => {
     const [ activeIndex, setActiveIndex] = useState(0);
-    const { data } = useSelector((state) => state.apps.list);
+    const { data } = useSelector((state) => state.meta.appList);
 
     const handleClick = (index) => {
         setActiveIndex(index);

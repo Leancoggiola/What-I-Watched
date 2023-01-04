@@ -1,51 +1,69 @@
 
-import { isEmpty } from 'lodash';
+import { isEmpty, pick } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useAuth0 } from '@auth0/auth0-react';
+import { checkIfContentInList } from '../../utils';
 // Components
 import { Modal, ModalBody, ModalFooter, ModalHeader} from '../../commonComponents/Modal';
 import ErrorMessage from '../../commonComponents/ErrorMessage';
 import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 import { Pill, PillGroup } from '../../commonComponents/Pill';
+import AddItemForm from '../AddItemForm/AddItemForm';
 // Middleware
 import { getOverviewDetailsRequest } from '../../middleware/actions/searchActions'
+import { postItemToListRequest } from '../../middleware/actions/listActions';
 // Styling
 import './ResultInfoModal.scss'
-import AddItemForm from '../AddItemForm/AddItemForm';
 
 const ResultInfoModal = (props) => {
-    const { show, onClose, item} = props;
-    const [ showAddItemForm, setShowAddItemForm  ] = useState(true);
+    const { show, onClose, item } = props;
+    const [ showAddItemForm, setShowAddItemForm  ] = useState(false);
+    const { user } = useAuth0();
 
-    const data = {
-        title:"The Beasts",
-        type:"movie",
-        releaseYear:2022,
-        rating:7.6,
-        genres: ["Thriller"],
-        summary: "In the mythical continent of Westeros, several powerful families fight for control of the Seven Kingdoms. As conflict erupts in the kingdoms of men, an ancient enemy rises once again to threaten them all. Meanwhile, the last heirs of a recently usurped dynasty plot to take back their homeland from across the Narrow Sea."
+    const dispatch = useDispatch()
+    
+    const { loading, data, error } = useSelector((state) => state.search.contentDetails);
+    const listCrud = useSelector((state) => state.list.crud);
+
+    useEffect(() => {
+        if(show) {
+            dispatch(getOverviewDetailsRequest(item.id))
+        }
+    }, [show])
+
+    useEffect(() => {
+        if(!isEmpty(listCrud.data)) {
+            setShowAddItemForm(false)
+            onClose()
+        }
+    }, [listCrud.data])
+
+    const handleSubmit = (app, status) => {
+        const postBody = {
+            user: user.email,
+            content: {
+                ...pick(data, ['title','type']),
+                imageUrl: item?.image?.url,
+                app,
+                status
+            }
+        }
+        dispatch(postItemToListRequest(postBody))
     }
-    // const dispatch = useDispatch()
-    // const { loading, data, error } = useSelector((state) => state.search.contentDetails);
-
-    // useEffect(() => {
-    //     if(show) {
-    //         dispatch(getOverviewDetailsRequest(item.id))
-    //     }
-    // }, [show])
 
     const getBodyContent = () => {
-        if(false) { //CAMBIAR loading
-            return <LoadingSpinner />
+        if(loading) {
+            return <LoadingSpinner showPosRelative={true} />
         }
-        if(false) { //CAMBIAR error 
-            return <ErrorMessage message={"No se encontro el contenido con id"} />
+        if(error) {
+            return <ErrorMessage message={'No se encontro el contenido con id'} />
         }
         if(!isEmpty(data)) {
             return (
                 <section className='result-overview'>
                     <article className='result-overview-img'>
-                        <img src={item?.image?.url ? "": "https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_.jpg"} alt={`${item?.title} portrait`} />
+                        <img src={item?.image?.url} alt={`${item?.title} portrait`} />
                     </article>
                     <article className='result-overview-info'>
                         <section className='result-overview-info-desc'>
@@ -71,22 +89,38 @@ const ResultInfoModal = (props) => {
             )
         }
     }
+
+    const getFooterContent = () => { 
+        if(listCrud.loading) {
+            return <LoadingSpinner showPosRelative={true} />
+        }
+        if(showAddItemForm) {
+            return <AddItemForm setShowAddItemForm={setShowAddItemForm} handleSubmit={handleSubmit} />
+        }
+        if(!item.inList) {
+            return (
+                <button type='button' className='btn overview-footer-btn' onClick={() => setShowAddItemForm(true)}>
+                    Añadir a la lista
+                </button>
+            )
+        } else {
+            return (
+                <button type='button' className='btn overview-footer-btn overview-footer-btn-remove' onClick={() => setShowAddItemForm(true)}>
+                    Eliminar a la lista
+                </button>   
+            )
+        }
+    }
     
     return (
-        <Modal show={false} onClose={onClose}>
+        <Modal show={show} onClose={onClose}>
             <ModalHeader>{item?.title}</ModalHeader>
             <ModalBody>
                 {getBodyContent()}
             </ModalBody>
             {!isEmpty(data) && (
-            <ModalFooter>
-                {showAddItemForm ? 
-                    <AddItemForm />
-                    :
-                    <button type='submit' onClick={() => setShowAddItemForm(true)}>
-                        Añadir a la lista
-                    </button>
-                }
+            <ModalFooter className={'overview-footer'}>
+                {getFooterContent()}
             </ModalFooter>)}
         </Modal>
     )

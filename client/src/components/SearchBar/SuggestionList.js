@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash';
 import { forwardRef, useEffect, useRef } from 'react';
 // Components
+import StatusPill from '../StatusPill/StatusPill';
 import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 // Styling
 import './SearchBar.scss'
@@ -17,14 +18,15 @@ const SuggestionList = forwardRef((props, ref) => {
     return (
         <div className='search-bar-suggestion-list' ref={target}>
             {loading ? 
-            <LoadingSpinner/>
+            <LoadingSpinner showPosRelative={true} />
             :
             !isEmpty(data) ? 
                 <div className='search-bar-result-container'>
                     {data.map((item) => (
                         <div className='search-bar-result-item' key={item.id} onClick={() => showResultInfo(item)}>
-                            <span>{item.title}</span>
+                            <span><b>{item.title}</b></span>
                             <span>{item.titleType}</span>
+                            { item.status && <StatusPill status={item.status}/> }
                         </div>
                     ))}
                 </div>

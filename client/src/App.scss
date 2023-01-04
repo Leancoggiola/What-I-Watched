@@ -7,6 +7,14 @@ body {
     background-color: var(--app-bg);
     color: var(--app-color);
     margin: 0;
+
+    font-family: Calibri;
+
+    input, button {
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
     .btn {
         background-color: var(--btn-primary-color-bg);
         border-color: var(--btn-primary-color-bg);
@@ -38,5 +46,12 @@ body {
         margin-top: 4rem;
         padding: 4rem;
         min-height: calc(100vh - 4rem - 8rem);
+    }
+
+    ::-webkit-scrollbar {
+        width: 0.625rem;
+        &-thumb {
+            background: var(--scrollbar-bg);
+        }
     }
 }
