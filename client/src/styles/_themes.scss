@@ -1,21 +1,5 @@
 @import './customVariables';
 
-// Default variables
-body {
-    --vertical-nav-collapse-width: 5rem;
-    --vertical-nav-expanded-width: 18rem;
-    --header-width: 4rem;
-    --avatar-size: 2.5rem;
-    --search-suggestion-item-height: 3rem;
-
-    --easy-in-out-fast: 150ms ease-in-out;
-    --easy-in-out-expo: cubic-bezier(1,0,0,1);
-
-    --error: #F95D54;
-    --warning: #ED6500;
-    --success: #57E188;
-}
-
 .theme-default {
     // App variables
     --app-bg: #{$app-bg-default};
@@ -64,4 +48,9 @@ body {
     --card-box-shadow-color-hover: #{$card-box-shadow-color-hover-default};
     --card-border-color: #{$card-border-color-default};
     --card-footer-bg: #{$card-footer-bg-default};
+
+    --carousel-bg: #{$carousel-bg-default};
+    --carousel-arrow-hover: #{$carousel-arrow-hover-default};
+    --carousel-focus: #{$carousel-focus-default};
+    --carousel-dot-color: #{$carousel-dot-color-default};
 }

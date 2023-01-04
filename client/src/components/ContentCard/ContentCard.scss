@@ -1,0 +1,10 @@
+.content-card {
+    &-header span {
+        text-transform: capitalize;
+    }
+    &-footer {
+        padding: 0.25rem 0.75rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

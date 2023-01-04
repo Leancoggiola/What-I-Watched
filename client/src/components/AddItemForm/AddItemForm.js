@@ -20,7 +20,8 @@ const AddItemForm = (props) => {
     const statusList = useSelector((state) => state.meta.statusList)
 
     const onSubmit = () => {
-        handleSubmit( app, status)
+        const appInfo = appList.data.find(x => x.name === app)
+        handleSubmit( appInfo.name, appInfo.displayName, status)
     }
 
     return (

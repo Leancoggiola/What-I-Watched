@@ -1,6 +1,6 @@
 import { getFailure, getRequest, getSuccess } from '../index.js';
 
-import { GET_USER_LIST, POST_ITEM_TO_LIST, PUT_CHANGE_ITEM_ON_LIST, DELETE_ITEM_FROM_LIST } from '../constants/list';
+import { GET_USER_LIST, POST_ITEM_TO_LIST, PUT_CHANGE_ITEM_ON_LIST, DELETE_ITEM_FROM_LIST, CHANGE_LIST_TO_DISPLAY } from '../constants/list';
 
 // GET User List
 export const getUserListRequest = (payload) => {
@@ -86,6 +86,14 @@ export const deleteItemFromListSuccess = (payload) => {
 export const deleteItemFromListFailure = (payload) => {
     return {
         type: getFailure(DELETE_ITEM_FROM_LIST),
+        payload
+    }
+}
+
+// List to Display
+export const changeListToDisplay = (payload) => {
+    return {
+        type: CHANGE_LIST_TO_DISPLAY,
         payload
     }
 }

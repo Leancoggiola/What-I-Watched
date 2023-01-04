@@ -25,7 +25,7 @@ export const postItemToList = async (req, res) => {
         const { user, content } = req.body;
 
         const userList  = await ListModel.findOne({user});
-        const appObj = await AppModel.findOne({ name: content.app})
+        const appObj = await AppModel.findOne({ name: content.appName})
         const statusObj= await StatusModel.findOne({ name: content.status})
 
         if( !appObj || !statusObj ) {
@@ -76,8 +76,9 @@ export const putChangeItemOnList = async (req, res) => {
         const contentIndex = userList.contentList.findIndex(item => item.title === content.name)
 
         if(contentIndex > -1) {
-            if(content.app) {
-                userList.contentList[contentIndex].app = content.app
+            if(content.appName && content.appDisplayName) {
+                userList.contentList[contentIndex].appName = content.appName
+                userList.contentList[contentIndex].appDisplayName = content.appDisplayName
             }
             if(content.status) {
                 userList.contentList[contentIndex].status = content.status

@@ -1,11 +1,12 @@
-import { DELETE_ITEM_FROM_LIST, GET_USER_LIST, POST_ITEM_TO_LIST, PUT_CHANGE_ITEM_ON_LIST } from '../constants/list';
+import { CHANGE_LIST_TO_DISPLAY, DELETE_ITEM_FROM_LIST, GET_USER_LIST, POST_ITEM_TO_LIST, PUT_CHANGE_ITEM_ON_LIST } from '../constants/list';
 import { getFailure, getRequest, getSuccess } from '../index.js';
 
 const initial = { loading: false, data: null, error: null };
 
 const initialState = {
     userList: {...initial},
-    crud: {...initial}
+    crud: {...initial},
+    display: 'all'
 }
 
 export const listReducer = (state = initialState, action) => {
@@ -89,6 +90,12 @@ export const listReducer = (state = initialState, action) => {
             return {
                 ...state,
                 crud: { loading: false, data: null, error: payload }
+            }
+        }
+        case CHANGE_LIST_TO_DISPLAY: {
+            return {
+                ...state,
+                display: payload ? payload : 'all'
             }
         }
         default: return state;

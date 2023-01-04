@@ -1,20 +1,19 @@
 
+import { useAuth0 } from '@auth0/auth0-react';
 import { isEmpty, pick } from 'lodash';
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useAuth0 } from '@auth0/auth0-react';
-import { checkIfContentInList } from '../../utils';
+import { useDispatch, useSelector } from 'react-redux';
 // Components
-import { Modal, ModalBody, ModalFooter, ModalHeader} from '../../commonComponents/Modal';
 import ErrorMessage from '../../commonComponents/ErrorMessage';
 import LoadingSpinner from '../../commonComponents/LoadingSpinner';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from '../../commonComponents/Modal';
 import { Pill, PillGroup } from '../../commonComponents/Pill';
 import AddItemForm from '../AddItemForm/AddItemForm';
 // Middleware
-import { getOverviewDetailsRequest } from '../../middleware/actions/searchActions'
 import { deleteItemFromListRequest, postItemToListRequest } from '../../middleware/actions/listActions';
+import { getOverviewDetailsRequest } from '../../middleware/actions/searchActions';
 // Styling
-import './ResultInfoModal.scss'
+import './ResultInfoModal.scss';
 
 const ResultInfoModal = (props) => {
     const { show, onClose, item } = props;
@@ -39,13 +38,14 @@ const ResultInfoModal = (props) => {
         }
     }, [listCrud.data])
 
-    const handleSubmit = (app, status) => {
+    const handleSubmit = (appName, appDisplayName, status) => {
         const postBody = {
             user: user.email,
             content: {
                 ...pick(data, ['title','type']),
                 imageUrl: item?.image?.url,
-                app,
+                appName,
+                appDisplayName,
                 status
             }
         }
