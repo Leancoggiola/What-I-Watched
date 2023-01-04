@@ -12,7 +12,7 @@ import { Pill, PillGroup } from '../../commonComponents/Pill';
 import AddItemForm from '../AddItemForm/AddItemForm';
 // Middleware
 import { getOverviewDetailsRequest } from '../../middleware/actions/searchActions'
-import { postItemToListRequest } from '../../middleware/actions/listActions';
+import { deleteItemFromListRequest, postItemToListRequest } from '../../middleware/actions/listActions';
 // Styling
 import './ResultInfoModal.scss'
 
@@ -50,6 +50,11 @@ const ResultInfoModal = (props) => {
             }
         }
         dispatch(postItemToListRequest(postBody))
+    }
+
+    const handleDelete = () => {
+        const postBody = { user: user.email, name: data.title}
+        dispatch(deleteItemFromListRequest(postBody))
     }
 
     const getBodyContent = () => {
@@ -97,15 +102,15 @@ const ResultInfoModal = (props) => {
         if(showAddItemForm) {
             return <AddItemForm setShowAddItemForm={setShowAddItemForm} handleSubmit={handleSubmit} />
         }
-        if(!item.inList) {
+        if(!item?.inList) {
             return (
-                <button type='button' className='btn overview-footer-btn' onClick={() => setShowAddItemForm(true)}>
+                <button type='button' className='overview-footer-btn btn-primary btn' onClick={() => setShowAddItemForm(true)}>
                     Añadir a la lista
                 </button>
             )
         } else {
             return (
-                <button type='button' className='btn overview-footer-btn overview-footer-btn-remove' onClick={() => setShowAddItemForm(true)}>
+                <button type='button' className='overview-footer-btn-remove overview-footer-btn btn' onClick={handleDelete}>
                     Eliminar a la lista
                 </button>   
             )

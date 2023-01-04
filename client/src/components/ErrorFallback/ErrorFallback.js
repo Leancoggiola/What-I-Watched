@@ -11,7 +11,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
                 <p className='main-text'>
                     Algo salio mal. Es necesario recargar la pagina o intentar mas tarde.
                 </p>
-                <button type='button' onClick={() => resetErrorBoundary()}>
+                <button type='button' className='btn btn-primary' onClick={() => resetErrorBoundary()}>
                     Reintentar
                 </button>
             </div>

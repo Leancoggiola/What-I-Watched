@@ -15,11 +15,7 @@ body {
         font-size: 1rem;
     }
 
-    .btn {
-        background-color: var(--btn-primary-color-bg);
-        border-color: var(--btn-primary-color-bg);
-        color: var(--btn-primary-color);
-        
+    .btn {        
         display: flex;
         align-items: center;
         justify-content: center;
@@ -36,9 +32,17 @@ body {
         cursor: pointer;
         overflow: visible;
         position: relative;
+
+        &-primary {
+            background-color: var(--btn-primary-color-bg);
+            border-color: var(--btn-primary-color-bg);
+            color: var(--btn-primary-color);
+        }
+
         &:hover, &:focus {
             background-color: var(--btn-primary-hover-bg);
             border-color: var(--btn-primary-hover-bg);
+            color: var(--btn-primary-color);
         }
     }
     .page {

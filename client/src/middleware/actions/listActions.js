@@ -1,6 +1,6 @@
 import { getFailure, getRequest, getSuccess } from '../index.js';
 
-import { GET_USER_LIST, POST_ITEM_TO_LIST } from '../constants/list';
+import { GET_USER_LIST, POST_ITEM_TO_LIST, PUT_CHANGE_ITEM_ON_LIST, DELETE_ITEM_FROM_LIST } from '../constants/list';
 
 // GET User List
 export const getUserListRequest = (payload) => {
@@ -42,6 +42,50 @@ export const postItemToListSuccess = (payload) => {
 export const postItemToListFailure = (payload) => {
     return {
         type: getFailure(POST_ITEM_TO_LIST),
+        payload
+    }
+}
+
+// Update Item on List
+export const putChangeItemOnListRequest = (payload) => {
+    return {
+        type: getRequest(PUT_CHANGE_ITEM_ON_LIST),
+        payload
+    }
+}
+
+export const putChangeItemOnListSuccess = (payload) => {
+    return {
+        type: getSuccess(PUT_CHANGE_ITEM_ON_LIST),
+        payload
+    }
+}
+
+export const putChangeItemOnListFailure = (payload) => {
+    return {
+        type: getFailure(PUT_CHANGE_ITEM_ON_LIST),
+        payload
+    }
+}
+
+// Delete Item from List
+export const deleteItemFromListRequest = (payload) => {
+    return {
+        type: getRequest(DELETE_ITEM_FROM_LIST),
+        payload
+    }
+}
+
+export const deleteItemFromListSuccess = (payload) => {
+    return {
+        type: getSuccess(DELETE_ITEM_FROM_LIST),
+        payload
+    }
+}
+
+export const deleteItemFromListFailure = (payload) => {
+    return {
+        type: getFailure(DELETE_ITEM_FROM_LIST),
         payload
     }
 }

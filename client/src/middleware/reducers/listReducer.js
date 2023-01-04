@@ -1,4 +1,4 @@
-import { GET_USER_LIST, POST_ITEM_TO_LIST } from '../constants/list';
+import { DELETE_ITEM_FROM_LIST, GET_USER_LIST, POST_ITEM_TO_LIST, PUT_CHANGE_ITEM_ON_LIST } from '../constants/list';
 import { getFailure, getRequest, getSuccess } from '../index.js';
 
 const initial = { loading: false, data: null, error: null };
@@ -46,6 +46,46 @@ export const listReducer = (state = initialState, action) => {
             }
         }
         case getFailure(POST_ITEM_TO_LIST): {
+            return {
+                ...state,
+                crud: { loading: false, data: null, error: payload }
+            }
+        }
+        // Update Item on List
+        case getRequest(PUT_CHANGE_ITEM_ON_LIST): {
+            return {
+                ...state,
+                crud: { loading: true, data: null, error: null }
+            }
+        }
+        case getSuccess(PUT_CHANGE_ITEM_ON_LIST): {
+            return {
+                ...state,
+                crud: { loading: false, data: payload.message, error: null },
+                userList: { loading: false, data: payload.newList, error: null }
+            }
+        }
+        case getFailure(PUT_CHANGE_ITEM_ON_LIST): {
+            return {
+                ...state,
+                crud: { loading: false, data: null, error: payload }
+            }
+        }
+        // Delete Item from List
+        case getRequest(DELETE_ITEM_FROM_LIST): {
+            return {
+                ...state,
+                crud: { loading: true, data: null, error: null }
+            }
+        }
+        case getSuccess(DELETE_ITEM_FROM_LIST): {
+            return {
+                ...state,
+                crud: { loading: false, data: payload.message, error: null },
+                userList: { loading: false, data: payload.newList, error: null }
+            }
+        }
+        case getFailure(DELETE_ITEM_FROM_LIST): {
             return {
                 ...state,
                 crud: { loading: false, data: null, error: payload }

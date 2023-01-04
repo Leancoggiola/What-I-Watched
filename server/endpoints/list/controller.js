@@ -36,7 +36,7 @@ export const postItemToList = async (req, res) => {
         if(!userList.contentList.some(item => item.title === content.title)) {
             userList.contentList.push(content)
             await userList.save()
-            res.status(200).json({ message: 'Se agrego correctamente', newList: userList })
+            res.status(200).json({ message: 'Agregado correctamente', newList: userList })
             return
         }
 
@@ -49,13 +49,47 @@ export const postItemToList = async (req, res) => {
 
 export const deleteItemFromList = async (req, res) => {
     try {
+        const { user, name } = req.body;
+
+        const userList  = await ListModel.findOne({user});
+
+        const contentIndex = userList.contentList.findIndex(item => item.title === name)
+
+        if(contentIndex > -1) {
+            userList.contentList.splice(contentIndex, 1);
+            await userList.save()
+        }
+
+        res.status(200).json({ message: 'Eliminado correctamente', newList: userList })
+
     } catch(e) {
         res.status(e?.status ? e.status : 404).json({ message: e.message })
     }
 }
 
-export const putChangeItemStatus = async (req, res) => {
+export const putChangeItemOnList = async (req, res) => {
     try {
+        const { user, content } = req.body;
+
+        const userList  = await ListModel.findOne({user});
+
+        const contentIndex = userList.contentList.findIndex(item => item.title === content.name)
+
+        if(contentIndex > -1) {
+            if(content.app) {
+                userList.contentList[contentIndex].app = content.app
+            }
+            if(content.status) {
+                userList.contentList[contentIndex].status = content.status
+            }
+            await userList.save()
+            res.status(200).json({ message: 'Actualizado correctamente', newList: userList })
+            return
+        } else {
+            res.status(400).json({ message: 'Bad Request - El item no se encuentra en la lista' })
+            return
+        }
+
     } catch(e) {
         res.status(e?.status ? e.status : 404).json({ message: e.message })
     }
