@@ -39,6 +39,12 @@ body {
             color: var(--btn-primary-color);
         }
 
+        &-secondary {
+            background-color: var(--btn-secondary-color-bg);
+            border-color: var(--btn-secondary-color);
+            color: var(--btn-secondary-color);
+        }
+
         &:hover, &:focus {
             background-color: var(--btn-primary-hover-bg);
             border-color: var(--btn-primary-hover-bg);

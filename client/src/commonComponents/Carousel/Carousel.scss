@@ -2,6 +2,7 @@
     .slick-track {
       display: flex !important;
       margin: 0;
+      gap: 2rem;
     }
     .slick-slide {
       height: auto;
@@ -9,6 +10,7 @@
     .slick-list {
       margin-right: -0.75rem;
       margin-left: -0.75rem;
+      overflow: initial;
     }
     .slick-track > .slick-slide {
       display: flex;
@@ -17,8 +19,6 @@
       & > div {
         width: 100%;
         padding: 0;
-        margin: 0 0.75rem; 
-        max-width: calc(100% - 1.5rem); 
       }
     }
 

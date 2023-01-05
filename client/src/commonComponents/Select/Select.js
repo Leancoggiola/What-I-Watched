@@ -52,9 +52,9 @@ const Select = (props) => {
     useEffect(() => {
         if(selectValue) {
             const currentValue = optionsChildren.reduce((acc, curr) => {
-                const { val, child, optionIndex } = curr.props;
-                if(val === selectValue) {
-                    acc.displayedValue = child;
+                const { value, children, optionIndex } = curr.props;
+                if(value === selectValue) {
+                    acc.displayedValue = children;
                     acc.optionSelected = optionIndex;
                     acc.optionCurrent = optionIndex;
                 }

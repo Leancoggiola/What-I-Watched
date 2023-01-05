@@ -1,6 +1,5 @@
 
-import { useAuth0 } from '@auth0/auth0-react';
-import { isEmpty, pick } from 'lodash';
+import { isEmpty } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Components
@@ -8,22 +7,23 @@ import ErrorMessage from '../../commonComponents/ErrorMessage';
 import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from '../../commonComponents/Modal';
 import { Pill, PillGroup } from '../../commonComponents/Pill';
-import AddItemForm from '../AddItemForm/AddItemForm';
+import ItemForm from '../ItemForm';
+import DeleteConfirmation from '../DeleteConfirmation';
 // Middleware
-import { deleteItemFromListRequest, postItemToListRequest } from '../../middleware/actions/listActions';
 import { getOverviewDetailsRequest } from '../../middleware/actions/searchActions';
 // Styling
 import './ResultInfoModal.scss';
 
 const ResultInfoModal = (props) => {
     const { show, onClose, item } = props;
-    const [ showAddItemForm, setShowAddItemForm  ] = useState(false);
-    const { user } = useAuth0();
+    const [ showItemForm, setShowItemForm  ] = useState(false);
+    const [ deleteModal, setDeleteModal ] = useState(false);
 
     const dispatch = useDispatch()
     
     const { loading, data, error } = useSelector((state) => state.search.contentDetails);
     const listCrud = useSelector((state) => state.list.crud);
+    
 
     useEffect(() => {
         if(show) {
@@ -33,29 +33,11 @@ const ResultInfoModal = (props) => {
 
     useEffect(() => {
         if(!isEmpty(listCrud.data)) {
-            setShowAddItemForm(false)
+            setShowItemForm(false)
             onClose()
         }
     }, [listCrud.data])
 
-    const handleSubmit = (appName, appDisplayName, status) => {
-        const postBody = {
-            user: user.email,
-            content: {
-                ...pick(data, ['title','type']),
-                imageUrl: item?.image?.url,
-                appName,
-                appDisplayName,
-                status
-            }
-        }
-        dispatch(postItemToListRequest(postBody))
-    }
-
-    const handleDelete = () => {
-        const postBody = { user: user.email, name: data.title}
-        dispatch(deleteItemFromListRequest(postBody))
-    }
 
     const getBodyContent = () => {
         if(loading) {
@@ -68,7 +50,7 @@ const ResultInfoModal = (props) => {
             return (
                 <section className='result-overview'>
                     <article className='result-overview-img'>
-                        <img src={item?.image?.url} alt={`${item?.title} portrait`} />
+                        <img src={data.imageUrl} alt={`${item?.title} portrait`} />
                     </article>
                     <article className='result-overview-info'>
                         <section className='result-overview-info-desc'>
@@ -96,21 +78,18 @@ const ResultInfoModal = (props) => {
     }
 
     const getFooterContent = () => { 
-        if(listCrud.loading) {
-            return <LoadingSpinner showPosRelative={true} />
-        }
-        if(showAddItemForm) {
-            return <AddItemForm setShowAddItemForm={setShowAddItemForm} handleSubmit={handleSubmit} />
+        if(showItemForm) {
+            return <ItemForm onClose={() => setShowItemForm(false)} itemData={data}/>
         }
         if(!item?.inList) {
             return (
-                <button type='button' className='overview-footer-btn btn-primary btn' onClick={() => setShowAddItemForm(true)}>
+                <button type='button' className='overview-footer-btn btn-primary btn' onClick={() => setShowItemForm(true)}>
                     Añadir a la lista
                 </button>
             )
         } else {
             return (
-                <button type='button' className='overview-footer-btn-remove overview-footer-btn btn' onClick={handleDelete}>
+                <button type='button' className='overview-footer-btn-remove overview-footer-btn btn' onClick={() => setDeleteModal(true)}>
                     Eliminar a la lista
                 </button>   
             )
@@ -127,6 +106,11 @@ const ResultInfoModal = (props) => {
             <ModalFooter className={'overview-footer'}>
                 {getFooterContent()}
             </ModalFooter>)}
+            <DeleteConfirmation show={deleteModal} 
+                onClose={() => setDeleteModal(false)} 
+                onSubmit={() => setDeleteModal(false)} 
+                title={item?.title}
+            />
         </Modal>
     )
 }

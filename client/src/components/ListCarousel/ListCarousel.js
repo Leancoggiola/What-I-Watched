@@ -2,14 +2,14 @@
 import Carousel from '../../commonComponents/Carousel'
 import ContentCard from '../ContentCard/ContentCard';
 // Styling
-import './AppListCarousel.scss'
+import './ListCarousel.scss'
 
-const AppListCarousel = (props) => {
+const ListCarousel = (props) => {
     const { list } = props;
     const slidesToShow = 6;
 
     return (
-        <div className='app-list-carousel-container'> 
+        <div className='list-carousel-container'> 
             <Carousel slidesToShow={slidesToShow}>
                 {list.length && list.map(item => (
                     <ContentCard item={item} key={item.title}/>
@@ -19,4 +19,4 @@ const AppListCarousel = (props) => {
     )
 }
 
-export default AppListCarousel;
+export default ListCarousel;

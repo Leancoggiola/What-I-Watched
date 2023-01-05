@@ -20,6 +20,11 @@ $btn-primary-color-default: $black;
 $btn-primary-hover-bg-default: $grey-200;
 $btn-primary-hover-default: $black;
 
+$btn-secondary-color-bg-default: transparent;
+$btn-secondary-color-default: $white;
+$btn-secondary-hover-bg-default: $grey-200;
+$btn-secondary-hover-default: $black;
+
 $btn-icon-hover-bg-default: $grey-450;
 $btn-icon-hover-color-default: $white;
 $btn-icon-focus-bg-default: $grey-450;
@@ -52,3 +57,4 @@ $carousel-focus-default: 0 0 0 2px rgba($yellow, 0.5);
 $carousel-arrow-hover-default: $grey-550;
 $carousel-arrow-border-default: $grey-580;
 $carousel-arrow-shadow-color-default: $grey-600;
+$carousel-edit-btn-color-default: $white;

@@ -1,11 +1,12 @@
+import { omit } from 'lodash';
 // Styling
 import './Card.scss';
 
 const Card = (props) => {
-    const { children, className } = props;
+    const { children, className, other = omit(props, ['children', 'className']) } = props;
     const classes = `cc-card ${className ? className : ''}`;
     
-    return(<div className={classes}>{children}</div>)
+    return(<div className={classes} {...other}>{children}</div>)
 }
 
 const CardHeader = (props) => {

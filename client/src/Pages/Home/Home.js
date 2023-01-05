@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Components
 import ErrorMessage from '../../commonComponents/ErrorMessage';
 import LoadingSpinner from '../../commonComponents/LoadingSpinner';
-import AppListCarousel from '../../components/AppListCarousel/AppListCarousel';
+import ListCarousel from '../../components/ListCarousel/ListCarousel';
 // Middleware
 import { getUserListRequest } from '../../middleware/actions/listActions';
 // Styling
@@ -36,7 +36,7 @@ const Home = () => {
                 {appList.data.map(app => {
                     if(appToDisplay === 'all' || appToDisplay === app.name ) {
                         return (
-                            <AppListCarousel 
+                            <ListCarousel 
                                 list={data.contentList.filter(item => item.appName === app.name)} 
                                 title={app.displayName} 
                                 id={app.name}

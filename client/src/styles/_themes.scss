@@ -20,6 +20,11 @@
     --btn-primary-hover-bg: #{$btn-primary-hover-bg-default};
     --btn-primary-hover: #{$btn-primary-hover-default};
 
+    --btn-secondary-color-bg: #{$btn-secondary-color-bg-default};
+    --btn-secondary-color: #{$btn-secondary-color-default};
+    --btn-secondary-hover-bg: #{$btn-secondary-hover-bg-default};
+    --btn-secondary-hover: #{$btn-secondary-hover-default};
+
     --btn-icon-hover-bg: #{$btn-icon-hover-bg-default};
     --btn-icon-hover-color:#{$btn-icon-hover-color-default};
     --btn-icon-focus-bg:#{$btn-icon-focus-bg-default};
@@ -54,4 +59,8 @@
     --carousel-arrow-hover: #{$carousel-arrow-hover-default};
     --carousel-arrow-border: #{$carousel-arrow-border-default};
     --carousel-arrow-shadow-color: #{$carousel-arrow-shadow-color-default};
+    --carousel-edit-btn-color: #{$carousel-edit-btn-color-default};
+
 }
+
+    
