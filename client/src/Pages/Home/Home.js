@@ -15,6 +15,7 @@ const Home = () => {
     const { user } = useAuth0();
     const dispatch = useDispatch();
     const { loading, data, error } = useSelector((state) => state.list.userList);
+    const crudState = useSelector((state) => state.list.crud);
     const appList = useSelector((state) => state.meta.appList)
     const appToDisplay = useSelector((state) => state.list.display);
 
@@ -24,7 +25,7 @@ const Home = () => {
         }
     }, [])
 
-    if(loading) return <LoadingSpinner />
+    if(loading || crudState.loading) return <LoadingSpinner />
 
     if(error) return <ErrorMessage message={error.message} />
 

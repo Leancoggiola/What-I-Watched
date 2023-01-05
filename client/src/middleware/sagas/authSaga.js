@@ -21,6 +21,16 @@ const getCookie = (cname) => {
     return '';
 }
 
+const getUserDetails = () => {
+    let data = '';
+    try {
+        data = JSON.parse(localStorage.getItem('@@auth0spajs@@::' + 'eACG1Ww9RQSOzODzyWu37HR0GalgYGsN' + '::default::openid profile email'))
+    } catch (e) {
+        return data;
+    }
+    return data?.body?.decodedToken?.user?.email ? data.body.decodedToken.user.email : '';
+}
+
 // Workers
 function* isUserLoggedInWork(action) {
     const { payload: { loginWithRedirect } } = action;
@@ -28,7 +38,12 @@ function* isUserLoggedInWork(action) {
         yield delay(2000)
         const isAuthenticatedCookieSet = getCookie(`auth0.eACG1Ww9RQSOzODzyWu37HR0GalgYGsN.is.authenticated`);
         if(isAuthenticatedCookieSet) {
-            yield put(isUserLoggedInSuccess(true));
+            let userEmail = '';
+            while(userEmail === '') {
+                yield delay(500)
+                userEmail = getUserDetails()
+            }
+            yield put(isUserLoggedInSuccess(userEmail));
         } else {
             loginWithRedirect({ appState: { returnTo: window.location.href }});
         }
