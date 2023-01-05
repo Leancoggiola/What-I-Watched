@@ -36,13 +36,12 @@ const Home = () => {
                 {appList.data.map(app => {
                     if(appToDisplay === 'all' || appToDisplay === app.name ) {
                         return (
-                            <section key={app.name} className='home-carousel'>
-                                <AppListCarousel 
-                                    list={data.contentList.filter(item => item.appName === app.name)} 
-                                    title={app.displayName} 
-                                    id={app.name}
-                                />
-                            </section>
+                            <AppListCarousel 
+                                list={data.contentList.filter(item => item.appName === app.name)} 
+                                title={app.displayName} 
+                                id={app.name}
+                                key={app.name}
+                            />
                         )}
                     })
                 }

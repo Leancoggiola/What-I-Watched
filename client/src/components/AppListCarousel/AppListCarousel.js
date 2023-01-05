@@ -7,14 +7,15 @@ import './AppListCarousel.scss'
 const AppListCarousel = (props) => {
     const { list } = props;
     const slidesToShow = 6;
-    const infinite = list.length > slidesToShow;
 
     return (
-        <Carousel slidesToShow={slidesToShow} extraSettings={{infinite}}>
-            {list.map(item => (
-                <ContentCard item={item} key={item.title}/>
-            ))}
-        </Carousel>
+        <div className='app-list-carousel-container'> 
+            <Carousel slidesToShow={slidesToShow}>
+                {list.length && list.map(item => (
+                    <ContentCard item={item} key={item.title}/>
+                ))}
+            </Carousel>
+        </div>
     )
 }
 

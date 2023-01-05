@@ -11,7 +11,7 @@ const ContentCard = (props) => {
 
     return (
         <Card className='content-card'>
-            <CardImage>
+            <CardImage className='content-card-img'>
                 <img src={item.imageUrl} alt={item.title+'portrait'} />
             </CardImage>
             <CardHeader className='content-card-header'>

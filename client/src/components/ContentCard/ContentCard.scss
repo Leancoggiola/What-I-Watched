@@ -1,6 +1,20 @@
 .content-card {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: 1fr repeat(2, min-content);
+    height: 100%;
+
+    &-img img{
+        height: 100%;
+    }
+
     &-header span {
         text-transform: capitalize;
+        &:first-child {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
     &-footer {
         padding: 0.25rem 0.75rem;
