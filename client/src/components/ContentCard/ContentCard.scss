@@ -4,6 +4,7 @@
     grid-template-rows: 1fr repeat(2, min-content);
     height: 100%;
     position: relative;
+    box-shadow: 0 0 0.5rem 0 var(--card-box-shadow-color-hover);
 
     &-img img{
         height: 100%;

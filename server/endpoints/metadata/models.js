@@ -14,7 +14,8 @@ export const statusSchema = mongoose.Schema({
 export const appSchema = mongoose.Schema({
     name: { type: String, required: true, unique: true },
     displayName: { type: String, required: true},
-    image: { type: imageSchema, required: true }
+    image: { type: imageSchema, required: true },
+    gradient: { type: String, required: true}
 })
 
 export const AppModel = mongoose.model('apps', appSchema);

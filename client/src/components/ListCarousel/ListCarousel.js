@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 // Components
 import Carousel from '../../commonComponents/Carousel'
 import ContentCard from '../ContentCard/ContentCard';
@@ -5,13 +6,21 @@ import ContentCard from '../ContentCard/ContentCard';
 import './ListCarousel.scss'
 
 const ListCarousel = (props) => {
-    const { list } = props;
+    const { list, appStyle } = props;
     const slidesToShow = 6;
+
+    const itemRef = useRef()
+
+    useEffect(() => {
+        if(itemRef?.current) {
+            itemRef.current.style.backgroundImage= appStyle;
+        }
+    }, [])
 
     return (
         <>
         {list.length > 0 &&
-            <section className='list-carousel-container'> 
+            <section className='list-carousel-container' ref={itemRef}> 
                 <Carousel slidesToShow={slidesToShow}>
                     {list.length && list.map(item => (
                         <ContentCard item={item} key={item.title}/>

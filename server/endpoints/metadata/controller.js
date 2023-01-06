@@ -86,16 +86,16 @@ export const deleteApp = async (req, res) => {
 
 export const putChangeApp = async (req, res) => {
     try {
-        const { params: { _id} } = req;
+        const { params: { id} } = req;
         let body = await uploadImage(req);
         if(body?.name) {
             body = {
                 ...body,
-                name: body.name.toLowerCase().replaceAll(' ',''),
+                name: body.name.toLowerCase().replaceAll(/\W/g,''),
                 displayName: body.name
             }
         }
-        AppModel.updateOne(_id, body)
+        AppModel.updateOne({_id: id}, body)
             .then(() => res.status(200).json('Updated successfully'))
             .catch(err => res.status(400).json({ message: err.message }))
     } catch(e) {
