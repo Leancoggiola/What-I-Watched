@@ -8,14 +8,15 @@ const imageSchema = mongoose.Schema({
 
 export const statusSchema = mongoose.Schema({
     order: { type: Number, required: true, unique: true },
-    name: { type: String, required: true, unique: true }
+    name: { type: String, required: true, unique: true },
+    style: { type: Object}
 })
 
 export const appSchema = mongoose.Schema({
     name: { type: String, required: true, unique: true },
     displayName: { type: String, required: true},
     image: { type: imageSchema, required: true },
-    gradient: { type: String, required: true}
+    style: { type: Object}
 })
 
 export const AppModel = mongoose.model('apps', appSchema);

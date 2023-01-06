@@ -40,7 +40,7 @@ const Home = () => {
                                 list={data.contentList.filter(item => item.appName === app.name)} 
                                 title={app.displayName} 
                                 id={app.name}
-                                appStyle={app.gradient}
+                                appStyle={app.style}
                                 key={app.name}
                             />
                         )}

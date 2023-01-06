@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 // Components
 import Carousel from '../../commonComponents/Carousel'
 import ContentCard from '../ContentCard/ContentCard';
@@ -9,18 +8,10 @@ const ListCarousel = (props) => {
     const { list, appStyle } = props;
     const slidesToShow = 6;
 
-    const itemRef = useRef()
-
-    useEffect(() => {
-        if(itemRef?.current) {
-            itemRef.current.style.backgroundImage= appStyle;
-        }
-    }, [])
-
     return (
         <>
         {list.length > 0 &&
-            <section className='list-carousel-container' ref={itemRef}> 
+            <section className='list-carousel-container' style={{...appStyle}}> 
                 <Carousel slidesToShow={slidesToShow}>
                     {list.length && list.map(item => (
                         <ContentCard item={item} key={item.title}/>

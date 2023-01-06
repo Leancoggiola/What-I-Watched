@@ -86,7 +86,7 @@ export const deleteApp = async (req, res) => {
 
 export const putChangeApp = async (req, res) => {
     try {
-        const { params: { id} } = req;
+        const { query: { id} } = req;
         let body = await uploadImage(req);
         if(body?.name) {
             body = {
@@ -95,9 +95,11 @@ export const putChangeApp = async (req, res) => {
                 displayName: body.name
             }
         }
-        AppModel.updateOne({_id: id}, body)
-            .then(() => res.status(200).json('Updated successfully'))
-            .catch(err => res.status(400).json({ message: err.message }))
+        AppModel.findByIdAndUpdate(id, body, (err) => {
+            if(err) res.status(400).json({ message: err.message })
+            else res.status(200).json('Updated successfully')
+            return
+        })
     } catch(e) {
         res.status(e?.status ? e.status : 400).json({ message: e.message })
     }
