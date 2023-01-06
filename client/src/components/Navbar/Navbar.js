@@ -1,9 +1,11 @@
 import { Buffer } from 'buffer';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // Assets
 import allAppsLogo from '../../assets/all-apps-icon.png';
+// Middleware
+import { changeListToDisplay } from '../../middleware/actions/listActions'
 // Styling
 import './Navbar.scss';
 
@@ -12,8 +14,11 @@ const Navbar = ({isCollapse}) => {
     const [ activeIndex, setActiveIndex] = useState(0);
     const { data } = useSelector((state) => state.meta.appList);
 
-    const handleClick = (index) => {
+    const dispath = useDispatch()
+
+    const handleClick = (index, appName) => {
         setActiveIndex(index);
+        dispath(changeListToDisplay(appName))
     }
 
     const getActiveButton = (activeIndex, index) => {
@@ -22,7 +27,7 @@ const Navbar = ({isCollapse}) => {
 
     return (
         <nav className={`navigation ${isCollapse ? 'navigation-collapse' : 'navigation-expanded'}`}>
-            <button type='button' className={`${getActiveButton(activeIndex, 0)}`} onClick={() => handleClick(0)}>
+            <button type='button' className={`${getActiveButton(activeIndex, 0)}`} onClick={() => handleClick(0, 'all')}>
                 <div className='icon-container'>  
                     <img src={allAppsLogo} alt='all-apps'/>
                 </div>
@@ -36,7 +41,7 @@ const Navbar = ({isCollapse}) => {
                         type='button' 
                         className={`${getActiveButton(activeIndex, index+1)}`} 
                         key={name}
-                        onClick={() => handleClick(index+1)}
+                        onClick={() => handleClick(index+1,name)}
                     >
                         <div className='icon-container'>  
                             <img src={imgSrc} alt={`${name}-app`}/>

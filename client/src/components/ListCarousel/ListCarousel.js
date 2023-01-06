@@ -9,13 +9,17 @@ const ListCarousel = (props) => {
     const slidesToShow = 6;
 
     return (
-        <div className='list-carousel-container'> 
-            <Carousel slidesToShow={slidesToShow}>
-                {list.length && list.map(item => (
-                    <ContentCard item={item} key={item.title}/>
-                ))}
-            </Carousel>
-        </div>
+        <>
+        {list.length > 0 &&
+            <section className='list-carousel-container'> 
+                <Carousel slidesToShow={slidesToShow}>
+                    {list.length && list.map(item => (
+                        <ContentCard item={item} key={item.title}/>
+                    ))}
+                </Carousel>
+            </section>
+        }
+        </>
     )
 }
 
