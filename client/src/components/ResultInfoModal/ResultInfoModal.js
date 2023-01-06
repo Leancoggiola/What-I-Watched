@@ -79,7 +79,7 @@ const ResultInfoModal = (props) => {
 
     const getFooterContent = () => { 
         if(showItemForm) {
-            return <ItemForm onClose={() => setShowItemForm(false)} itemData={data}/>
+            return <ItemForm onClose={() => setShowItemForm(false)} itemData={data} isNew={true}/>
         }
         if(!item?.inList) {
             return (

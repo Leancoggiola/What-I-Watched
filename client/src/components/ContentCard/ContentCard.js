@@ -7,6 +7,7 @@ import IconButton from '../../commonComponents/IconButton';
 import { Modal, ModalBody, ModalHeader } from '../../commonComponents/Modal';
 import { Pill } from '../../commonComponents/Pill';
 import ItemForm from '../ItemForm';
+import StatusPill from '../StatusPill';
 import DeleteConfirmation from '../DeleteConfirmation';
 // Styling
 import './ContentCard.scss';
@@ -27,7 +28,7 @@ const ContentCard = (props) => {
                 <span>{item.type}</span>
             </CardHeader>
             <CardFooter className='content-card-footer'>
-                <Pill className='content-card-footer-pill'>{item.status}</Pill>
+                <StatusPill className='content-card-footer-pill' status={item.status} />
                 <Pill className='content-card-footer-pill'>{item.appDisplayName}</Pill>
             </CardFooter>
             <IconButton className={`content-card-btn content-card-btn-edit${!showButtons ? ' hidden' : ''}`} onClick={() => setEditModal(true)}>

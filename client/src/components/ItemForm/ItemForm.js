@@ -10,12 +10,12 @@ import Label from '../../commonComponents/Label';
 import LoadingSpinner from '../../commonComponents/LoadingSpinner';
 import { Option, Select } from '../../commonComponents/Select';
 // Middleware
-import { postItemToListRequest } from '../../middleware/actions/listActions';
+import { postItemToListRequest, putChangeItemOnListRequest } from '../../middleware/actions/listActions';
 // Styling
 import './ItemForm.scss';
 
 const ItemForm = (props) => {
-    const { onClose, currentApp = '', currentStatus = '', itemData } = props;
+    const { onClose, currentApp = '', currentStatus = '', itemData, isNew } = props;
     const [ status, setStatus ] = useState(currentStatus);
     const [ app, setApp ] = useState(currentApp);
     const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const ItemForm = (props) => {
                 status
             }
         }
-        dispatch(postItemToListRequest(postBody))
+        isNew ? dispatch(postItemToListRequest(postBody)) : dispatch(putChangeItemOnListRequest(postBody))
         onClose()
     }
 

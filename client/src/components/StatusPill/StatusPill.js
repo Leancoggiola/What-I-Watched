@@ -2,8 +2,8 @@ import { Pill } from '../../commonComponents/Pill';
 // Styling
 import './StatusPill.scss'
 
-const StatusPill = ({ status }) => {
-    const classes = `status-pill-${status?.toLowerCase()}`
+const StatusPill = ({ status, className }) => {
+    const classes = `status-pill-${status?.toLowerCase()} ${className ? className : ''}`
     return (
         <Pill className={classes}>{status}</Pill>
     )

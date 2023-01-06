@@ -71,25 +71,18 @@ export const putChangeItemOnList = async (req, res) => {
     try {
         const { user, content } = req.body;
 
-        const userList  = await ListModel.findOne({user});
-
-        const contentIndex = userList.contentList.findIndex(item => item.title === content.name)
-
-        if(contentIndex > -1) {
-            if(content.appName && content.appDisplayName) {
-                userList.contentList[contentIndex].appName = content.appName
-                userList.contentList[contentIndex].appDisplayName = content.appDisplayName
-            }
-            if(content.status) {
-                userList.contentList[contentIndex].status = content.status
-            }
-            await userList.save()
-            res.status(200).json({ message: 'Actualizado correctamente', newList: userList })
-            return
-        } else {
-            res.status(400).json({ message: 'Bad Request - El item no se encuentra en la lista' })
-            return
-        }
+        ListModel.findOneAndUpdate(
+            {'user': user,'contentList.title': content.title}, 
+            {'$set': {
+                'contentList.$.appName': content.appName,
+                'contentList.$.appDisplayName': content.appDisplayName,
+                'contentList.$.status': content.status,
+            }},
+            {new: true},
+            (err, newList) => {
+                if(err) res.status(400).json({ message: 'Bad Request - El item no se encuentra en la lista' })
+                else res.status(200).json({ message: 'Actualizado correctamente', newList: newList })
+            })
 
     } catch(e) {
         res.status(e?.status ? e.status : 404).json({ message: e.message })

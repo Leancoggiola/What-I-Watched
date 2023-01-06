@@ -41,6 +41,7 @@
     .search-bar-suggestion-list {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
         position: absolute;
         top: var(--header-width);
         z-index: 999;
@@ -51,6 +52,11 @@
 
         background-color: var(--app-submenu-bg);
         box-shadow: -2px 5px 14px -6px rgb(12 12 12 / 75%);
+        
+        &:not(.search-bar-result-container) {
+            justify-content: center;
+        }
+
         .search-bar-result-container {
             cursor: pointer;
             height: 100%;
