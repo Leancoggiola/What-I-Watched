@@ -45,7 +45,7 @@ export default () => {
   }, [loggedUser])
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <ErrorBoundary 
         fallbackRender={({error, resetErrorBoundary}) => (
           <ErrorFallback error={error}resetErrorBoundary={resetErrorBoundary} />

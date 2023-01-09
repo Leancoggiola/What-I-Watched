@@ -1,10 +1,10 @@
 .navigation {
     display: flex;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     overflow: hidden;
-    bottom: 0;
-    height: calc(100vh - 4rem);
+    top: 4rem;
+    height: 100%; // Modify in the future
     z-index: 100;
     background-color: var(--navigation-bg);
     border-right: 1px solid var(--app-bg);
@@ -12,10 +12,17 @@
     &-collapse {
         width: var(--vertical-nav-collapse-width);
         transition: width 0.5s;
+        @media screen and (max-width: 480px){
+            display: none;
+        }
     }
     &-expanded {
         width: var(--vertical-nav-expanded-width);
         transition: width 0.5s;
+        @media screen and (max-width: 480px){
+            display: flex;
+            width: var(--vertical-nav-collapse-width);
+        }
     }
 
     button {

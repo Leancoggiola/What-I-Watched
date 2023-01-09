@@ -20,7 +20,6 @@ const Header = (props) => {
                         <Icon src={navigationIcMenu} />
                     </IconButton>
                 </div>
-                <div className='header-title'><h1>What I Saw App</h1></div>
                 <div className='header-search'><SearchBar/></div>
                 <div className='header-profile'><ProfileMenu /></div>
             </header>

@@ -31,6 +31,9 @@
             padding-right: 2rem;
             border: none;
             background-color: transparent;
+            @media screen and (max-width: 480px){
+                display: none;
+            }
             svg { 
                 fill: var(--icon-color);
                 height: 2rem;

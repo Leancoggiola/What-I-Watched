@@ -1,9 +1,9 @@
 header {
-    position: fixed;
+    position: absolute;
     display: grid; 
-    grid-template-columns: var(--vertical-nav-collapse-width) min-content 1fr var(--vertical-nav-collapse-width);
+    grid-template-columns: var(--vertical-nav-collapse-width) 1fr var(--vertical-nav-collapse-width);
     grid-template-rows: 1fr;
-    grid-template-areas: 'Menu Title Search Profile'; 
+    grid-template-areas: 'Menu Search Profile'; 
     align-items: center;
     gap: 0 2rem; 
     width: 100%;
@@ -11,6 +11,9 @@ header {
     z-index: 100;
     top: 0;
     background-color: var(--navigation-bg);
+    @media screen and (max-width: 480px){
+        gap: 0 .5rem;
+    }
 
     .header-menu {
         grid-area: Menu;
@@ -32,18 +35,13 @@ header {
             }
         }
     }
-    .header-title {
-        grid-area: Title;
-        h1 {
-            margin: 0;
-            white-space: nowrap;
-        }
-    }
     .header-search {
         grid-area: Search;
-        position: absolute;
         width: 50%;
-        left: calc(50%);
+        justify-self: end;
+        @media screen and (max-width: 480px){
+            width: 100%;
+        }
     }
     .header-profile {
         grid-area: Profile;
