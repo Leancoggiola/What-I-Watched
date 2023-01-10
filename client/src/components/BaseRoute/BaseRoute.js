@@ -10,7 +10,7 @@ const Home = lazy(() => import('../../pages/Home'));
 
 const BaseRoute = () => {
   return(
-    <div>
+    <>
       <Header search={SearchBar} profileMenu={Profile} />      
       <Switch>
         <Route 
@@ -20,7 +20,7 @@ const BaseRoute = () => {
         />
         <Route path='*'><Redirect to='/'/></Route> 
       </Switch>
-    </div>
+    </>
   )
 }
 
