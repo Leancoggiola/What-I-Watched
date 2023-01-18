@@ -9,8 +9,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
-
 # rest testing file
 testing.http
 
 package-lock.json
+
+build/
