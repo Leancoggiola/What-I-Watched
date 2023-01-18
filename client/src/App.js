@@ -11,7 +11,7 @@ import BaseRoute from './components/BaseRoute';
 import ErrorFallback from './components/ErrorFallback';
 import InprogressFallback from './components/InprogressFallback';
 // Pages
-import Login from './pages/Login';
+import Login from './views/Login';
 
 // Middleware
 import { isUserLoggedInRequest } from './middleware/actions/authActions';

@@ -6,7 +6,7 @@ import SearchBar from '../../components/SearchBar';
 import Profile from '../../components/Profile';
 
 // Pages
-const Home = lazy(() => import('../../pages/Home'));
+const Home = lazy(() => import('../../views/Home'));
 
 const BaseRoute = () => {
   return(
