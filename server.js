@@ -5,7 +5,6 @@ import cors from 'cors';
 import path from 'path';
 import * as dotenv from 'dotenv';
 
-
 import imdbRoutes from './endpoints/imdb/routes.js';
 import listRoutes from './endpoints/list/routes.js';
 import metadataRoutes from './endpoints/metadata/routes.js';
@@ -34,8 +33,11 @@ app.use('/list', listRoutes)
 app.use('/meta', metadataRoutes)
 
 // Deploy config
-app.use(express.static(path.join(__dirname, '/client/build')));
-app.get('*', (req,res) => res.sendFile(path.join(__dirname, '/client/build/index.html')));
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+
+    app.get('*', (req,res) => res.sendFile(path.join(__dirname, 'client', 'build','index.html')));
+}
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
