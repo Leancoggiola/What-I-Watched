@@ -2,6 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 
 import imdbRoutes from './endpoints/imdb/routes.js';
 import listRoutes from './endpoints/list/routes.js';
@@ -10,7 +13,8 @@ import metadataRoutes from './endpoints/metadata/routes.js';
 // Constants
 const PORT = process.env.PORT || 3001;
 const app = express();
-const CONNECTION_URL = 'mongodb+srv://leanco:EaFQJ1gOWYeZJAGH@whatisaw-personal.3wvmhlp.mongodb.net/?retryWrites=true&w=majority'
+const CONNECTION_URL = process.env.MONGO_URI;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Configuration
 
@@ -22,6 +26,13 @@ app.use(cors());
 app.use('/imdb', imdbRoutes)
 app.use('/list', listRoutes)
 app.use('/meta', metadataRoutes)
+
+// Deploy config
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'client', 'build','index.html')));
+}
 
 // DB config
 mongoose.set('strictQuery', true)
