@@ -56,7 +56,17 @@
       }
     }
 
-    .next-arrow { right: -3rem; }
-    .prev-arrow { left: -3rem; }
+    .next-arrow { 
+      right: -3rem;
+      @media screen and (max-width: 480px){
+        right: 0;
+      }
+    }
+    .prev-arrow { 
+      left: -3rem; 
+      @media screen and (max-width: 480px){
+        left: 0;
+      }
+    }
 
   }

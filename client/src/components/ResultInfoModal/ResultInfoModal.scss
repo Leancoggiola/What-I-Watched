@@ -3,6 +3,9 @@
     grid-auto-flow: column;
     grid-template-columns: 30% 1fr;
     grid-gap: 0 2rem;
+    @media screen and (max-width: 480px) {
+        display: block;
+    }
     &-img {
         box-shadow: 0 0 1rem var(--border-color-navigation), 0 0 1rem var(--border-color-navigation);
         border: 1px solid var(--app-color);

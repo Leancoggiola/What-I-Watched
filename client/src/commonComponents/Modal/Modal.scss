@@ -12,6 +12,9 @@
     bottom: 0;
     padding: 3rem;
     background: var(--modal-overlay-bg);
+    @media screen and (max-width: 480px) {
+        padding: 0;
+    }
     &-dialog-container {
         max-width: 60rem;
         min-width: 20rem;

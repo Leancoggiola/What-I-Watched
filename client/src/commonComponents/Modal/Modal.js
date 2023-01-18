@@ -1,6 +1,7 @@
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ModalContext, ModalProvider } from '../contexts';
+import FocusTrap from 'focus-trap-react';
 
 // Components
 import { navigationIcClose } from '../../assets/icons';
@@ -27,9 +28,11 @@ const Modal = (props) => {
         <ModalProvider value={{closeModal}}>
             {show && <Portal>
                 <div className='cc-modal'>
-                    <div role='dialog' className={classes}>
-                        {children}
-                    </div>
+                    <FocusTrap active={true} paused={false} focusTrapOptions={{}}>
+                        <div role='dialog' className={classes}>
+                            {children}
+                        </div>
+                    </FocusTrap>
                 </div>
             </Portal>}
         </ModalProvider>
