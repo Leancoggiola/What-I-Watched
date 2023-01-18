@@ -21,7 +21,7 @@ import { getAppsRequest, getStatusRequest } from './middleware/actions/metaActio
 import './App.scss';
 
 export default () => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   const dispatch = useDispatch();
   const loggedUser = useSelector((state) => state.auth)
   const appList = useSelector((state) => state.meta.appList)
@@ -57,8 +57,8 @@ export default () => {
                 <InprogressFallback status={'Autenticando Usuario'}/>
               }>
                 {window.location.pathname == '/login' ? <Login />:
-                !loggedUser.data || !appList.data || !statusList.data ? <InprogressFallback status={'Preparando la aplicacion'}/> :
-                !isAuthenticated ? <InprogressFallback status={'Autenticando Usuario'}/> :
+                !appList.data || !statusList.data ? <InprogressFallback status={'Preparando la aplicacion'}/> :
+                !loggedUser.data ? <InprogressFallback status={'Autenticando Usuario'}/> :
                 <BaseRoute />}
             </Suspense>
         </BrowserRouter>

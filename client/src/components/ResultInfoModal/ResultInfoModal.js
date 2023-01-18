@@ -106,11 +106,11 @@ const ResultInfoModal = (props) => {
             <ModalFooter className={'overview-footer'}>
                 {getFooterContent()}
             </ModalFooter>)}
-            <DeleteConfirmation show={deleteModal} 
+            {deleteModal && <DeleteConfirmation show={deleteModal} 
                 onClose={() => setDeleteModal(false)} 
                 onSubmit={() => setDeleteModal(false)} 
                 title={item?.title}
-            />
+            />}
         </Modal>
     )
 }
