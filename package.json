@@ -1,0 +1,14 @@
+{
+  "name": "what-i-watched",
+  "version": "1.0.0",
+  "description": "Personal application to track series and movies",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "cd server && npm install  && cd ../client && npm install && npm run build",
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
