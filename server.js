@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+require('dotenv').config();
 
 
 import imdbRoutes from './endpoints/imdb/routes.js';
