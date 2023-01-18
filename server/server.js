@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
+
 
 import imdbRoutes from './endpoints/imdb/routes.js';
 import listRoutes from './endpoints/list/routes.js';
@@ -13,6 +14,7 @@ import metadataRoutes from './endpoints/metadata/routes.js';
 const PORT = process.env.PORT || 8000;
 const app = express();
 const __dirname = path.resolve();
+dotenv.config()
 
 // DB config
 mongoose.set('strictQuery', true)
@@ -22,7 +24,6 @@ mongoose
     .catch((err) => console.error(err.message));
 
 // Configuration
-dotenv.config();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
