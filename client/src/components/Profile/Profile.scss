@@ -3,10 +3,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    cursor: initial;
     &:hover {
         background-color: var(--btn-icon-hover-bg);
     }
     &:focus {
         background-color: var(--btn-icon-focus-bg);
     }
+    .cc-avatar { cursor: pointer; }
 }
