@@ -11,7 +11,7 @@ import listRoutes from './endpoints/list/routes.js';
 import metadataRoutes from './endpoints/metadata/routes.js';
 
 // Constants
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8000;
 const app = express();
 const CONNECTION_URL = process.env.MONGO_URI;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

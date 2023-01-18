@@ -20,7 +20,7 @@ function* getUserListWork(action) {
     const { payload } = action;
     try {
         const options = {
-            url: 'http://localhost:3001/list/getList',
+            url: '/list/getList',
             method: 'GET',
             params: {
                 user: payload
@@ -37,7 +37,7 @@ function* postItemToListWork(action) {
     const { payload } = action;
     try {
         const options = {
-            url: 'http://localhost:3001/list/postItemToList',
+            url: '/list/postItemToList',
             method: 'POST',
             data: payload
         }
@@ -52,7 +52,7 @@ function* putChangeItemOnListWork(action) {
     const { payload } = action;
     try {
         const options = {
-            url: 'http://localhost:3001/list/putChangeItemOnList',
+            url: '/list/putChangeItemOnList',
             method: 'PUT',
             data: payload
         }
@@ -67,7 +67,7 @@ function* deleteItemFromListWork(action) {
     const { payload } = action;
     try {
         const options = {
-            url: 'http://localhost:3001/list/deleteItemFromList',
+            url: '/list/deleteItemFromList',
             method: 'DELETE',
             data: payload
         }

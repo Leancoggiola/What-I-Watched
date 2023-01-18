@@ -12,10 +12,10 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <Auth0Provider 
-      domain='whatisaw.us.auth0.com'
-      clientId= 'eACG1Ww9RQSOzODzyWu37HR0GalgYGsN'
+      domain={process.env.AUTH0_DOMAIN}
+      clientId={process.env.AUTH0_CLIENT_ID}
       redirectUri= {window.location.origin}
-      cacheLocation={'localstorage'}
+      cacheLocation={process.env.AUTH0_CACHE_LOCATION}
       >
       <App/>
     </Auth0Provider>

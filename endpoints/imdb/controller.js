@@ -3,11 +3,11 @@ import lodash from 'lodash';
 const { pick } = lodash;
 
 const defaultOptions = {
-    url: 'https://online-movie-database.p.rapidapi.com',
+    url: process.env.RAPID_API_URL,
     params: {limit: '5', titleType: 'tvSeries,movie'},
     headers: {
-      'X-RapidAPI-Key': '11797de419msh557864eba0d9d55p112880jsn82c94a8b6dd7', // Replace later
-      'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com'
+      'X-RapidAPI-Key': process.env.RAPID_API_KEY, // Replace later
+      'X-RapidAPI-Host': process.env.RAPID_API_HOST
     }
   };
 

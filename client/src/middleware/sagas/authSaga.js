@@ -24,7 +24,7 @@ const getCookie = (cname) => {
 const getUserDetails = () => {
     let data = '';
     try {
-        data = JSON.parse(localStorage.getItem('@@auth0spajs@@::' + 'eACG1Ww9RQSOzODzyWu37HR0GalgYGsN' + '::default::openid profile email'))
+        data = JSON.parse(localStorage.getItem('@@auth0spajs@@::' + process.env.AUTH0_CLIENT_ID + '::default::openid profile email'))
     } catch (e) {
         return data;
     }
@@ -36,7 +36,7 @@ function* isUserLoggedInWork(action) {
     const { payload: { loginWithRedirect } } = action;
     try {
         yield delay(2000)
-        const isAuthenticatedCookieSet = getCookie(`auth0.eACG1Ww9RQSOzODzyWu37HR0GalgYGsN.is.authenticated`);
+        const isAuthenticatedCookieSet = getCookie(`auth0.${process.env.AUTH0_CLIENT_ID}.is.authenticated`);
         if(isAuthenticatedCookieSet) {
             let userEmail = '';
             while(userEmail === '') {

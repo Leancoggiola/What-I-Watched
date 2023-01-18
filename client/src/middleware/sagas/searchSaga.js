@@ -16,7 +16,7 @@ function* getContentSearchWork(action) {
     const { payload } = action;
     try {
         const options = {
-            url: 'http://localhost:3001/imdb/getContent',
+            url: '/imdb/getContent',
             method: 'GET',
             params: {
                 title: payload
@@ -33,7 +33,7 @@ function* getOverviewDetailsWork(action) {
     const { payload } = action;
     try {
         const options = {
-            url: 'http://localhost:3001/imdb/getOverviewDetails',
+            url: '/imdb/getOverviewDetails',
             method: 'GET',
             params: {
                 tconst: payload,
