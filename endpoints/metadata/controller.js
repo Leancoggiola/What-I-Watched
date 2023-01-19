@@ -64,7 +64,7 @@ module.exports = {
             const body = await uploadImage(req);
             const newApp = new AppModel({
                 ...body,
-                name: body.name.toLowerCase().replaceAll(' ',''),
+                name: body.name.toLowerCase().replace(/ /g,''),
                 displayName: body.name
             });
             newApp.save()
@@ -93,7 +93,7 @@ module.exports = {
             if(body?.name) {
                 body = {
                     ...body,
-                    name: body.name.toLowerCase().replaceAll(/\W/g,''),
+                    name: body.name.toLowerCase().replace(/\W/g,''),
                     displayName: body.name
                 }
             }

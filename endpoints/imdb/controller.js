@@ -21,11 +21,11 @@ module.exports = {
             options.params = {...options.params, ...query}
             const {status, data} =  await axios.request(options);
 
-            const regex = /(?<=\/title\/)(.*?)(?=\/)/g
             const resBody = data?.results ? data.results.map(item => {
-                item.id = regex.exec(item.id)[1];
+                item.id = item.id.replace('title','').replace(/\//g,'');
                 return pick(item, ['id', 'title', 'image', 'titleType'])
             }) : [];
+
             res.status(status).send(resBody)
         } catch(e) {
             const {response: {status} = {},message = ''} = e;

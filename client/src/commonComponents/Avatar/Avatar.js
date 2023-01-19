@@ -9,7 +9,7 @@ const Avatar = forwardRef((props,ref) => {
         name.match(/(\b\S)?/g)
             .join('')
             .split('@')[0]
-            .replaceAll('.','')
+            .replace(/./g,'')
             .slice(0, 2)
             .toUpperCase();
 
