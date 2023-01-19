@@ -45,7 +45,7 @@ function* isUserLoggedInWork(action) {
             }
             yield put(isUserLoggedInSuccess(userEmail));
         } else {
-            loginWithRedirect({ appState: { returnTo: window.location.href }});
+            loginWithRedirect();
         }
     } catch (e) {
         yield put(isUserLoggedInFailure(e));

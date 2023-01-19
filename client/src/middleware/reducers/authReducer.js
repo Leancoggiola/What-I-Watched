@@ -15,7 +15,7 @@ export const authReducer = (state = initialState, action) => {
             return {...state, loading: false, data: payload, error: null }
         }
         case getFailure(GET_LOGGED_USER): {
-            return {...state, loading: false, data: null, error: true }
+            return {...state, loading: false, data: null, error: payload }
         }
         // LOG OUT USER
         case getRequest(GET_LOGOUT_USER): {

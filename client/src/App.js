@@ -12,9 +12,10 @@ import ErrorFallback from './components/ErrorFallback';
 import InprogressFallback from './components/InprogressFallback';
 // Pages
 import Login from './views/Login';
+import Unauthorized from './views/Unauthorized';
 
 // Middleware
-import { isUserLoggedInRequest } from './middleware/actions/authActions';
+import { isUserLoggedInFailure, isUserLoggedInRequest } from './middleware/actions/authActions';
 import { getAppsRequest, getStatusRequest } from './middleware/actions/metaActions';
 
 // Styles
@@ -22,13 +23,20 @@ import './App.scss';
 
 export default () => {
   const { loginWithRedirect } = useAuth0();
+
   const dispatch = useDispatch();
+
   const loggedUser = useSelector((state) => state.auth)
   const appList = useSelector((state) => state.meta.appList)
   const statusList = useSelector((state) => state.meta.statusList)
 
   useEffect(() => {
-    if(window.location.pathname !== '/login' && window.navigator.onLine) {
+    const queryParams = new URLSearchParams(window.location.search);
+    const error = queryParams.get('error');
+    if(error) {
+      const errorDescription = queryParams.get('error_description');
+      dispatch(isUserLoggedInFailure({error, errorDescription}))
+    } else if(window.location.pathname !== '/login' && window.navigator.onLine) {
       dispatch(isUserLoggedInRequest({ loginWithRedirect }))
     }
     return () => {
@@ -56,7 +64,8 @@ export default () => {
             <Suspense fallback={
                 <InprogressFallback status={'Autenticando Usuario'}/>
               }>
-                {window.location.pathname === '/login' ? <Login />:
+                {loggedUser.error ? <Unauthorized errorObj={loggedUser.error} /> :
+                window.location.pathname === '/login' ? <Login />:
                 !appList.data || !statusList.data ? <InprogressFallback status={'Preparando la aplicacion'}/> :
                 !loggedUser.data ? <InprogressFallback status={'Autenticando Usuario'}/> :
                 <BaseRoute />}
