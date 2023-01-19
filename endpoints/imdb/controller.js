@@ -14,18 +14,20 @@ const getOptions = () => ({
 module.exports = {
     getContent: async (req, res) => {
         try {
+            console.log("LLEGO ACA 1")
             const { method, query } = req;
             const options = getOptions();
             options.url = `${options.url}/title/v2/find`;
             options.method = method;
             options.params = {...options.params, ...query}
-        
+            console.log("LLEGO ACA 2")
             const {status, data} =  await axios.request(options);
+            console.log("LLEGO ACA 3")
             const resBody = data?.results ? data.results.map(item => {
                 item.id = item.id.replace('title','').replaceAll('/','');
                 return pick(item, ['id', 'title', 'image', 'titleType'])
             }) : [];
-    
+            console.log("LLEGO ACA 4")
             res.status(status).send(resBody)
         } catch(e) {
             const {response: {status} = {},message = ''} = e;
