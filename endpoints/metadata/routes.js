@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import {
+const {
     getAppList,
     getStatusList,
     deleteApp,
@@ -10,7 +10,7 @@ import {
     postNewStatus,
     putChangeApp,
     putChangeStatus
-}from './controller.js';
+}= require('./controller.js');
 
 router.get('/getAppList', getAppList);
 router.get('/getStatusList', getStatusList);
@@ -21,4 +21,4 @@ router.post('/postNewStatus', postNewStatus);
 router.put('/putChangeApp', putChangeApp);
 router.put('/putChangeStatus', putChangeStatus);
 
-export default router;
+module.exports =  router;

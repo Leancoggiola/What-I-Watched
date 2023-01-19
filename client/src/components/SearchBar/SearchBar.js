@@ -77,7 +77,7 @@ const SearchBar = () => {
                         value={displayValue}
                         onChange={(e) => setDisplayValue(e.target.value)}
                     />
-                    <IconButton type='button' className={'search-icon-btn'} onClick={() => setToggleNavBar(!isCollapse)} >
+                    <IconButton type='button' className={'search-icon-btn'} onClick={() => dispatch(getContentSearchRequest(searchWord))} >
                         <Icon src={actionIcSearch} />
                     </IconButton>
                 </div>

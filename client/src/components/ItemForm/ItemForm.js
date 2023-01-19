@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { pick } from 'lodash';
 // Components
 import { navigationIcCheck, navigationIcClose } from '../../assets/icons';
 import FormField from '../../commonComponents/FormField';

@@ -1,5 +1,5 @@
 import { getFailure, getSuccess, getRequest} from '../index.js';
-import { GET_LOGGED_USER, GET_LOGOUT_USER, GET_PERMISSION_LIST } from '../constants/auth';
+import { GET_LOGGED_USER, GET_LOGOUT_USER } from '../constants/auth';
 
 const initialState = { loading: false, data: null, error: null }
 

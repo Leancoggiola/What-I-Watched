@@ -1,11 +1,11 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
 
-import { getList, postItemToList, putChangeItemOnList, deleteItemFromList } from './controller.js';
+const { getList, postItemToList, putChangeItemOnList, deleteItemFromList } = require('./controller.js');
 
 router.get('/getList', getList);
 router.post('/postItemToList', postItemToList)
 router.put('/putChangeItemOnList', putChangeItemOnList)
 router.delete('/deleteItemFromList', deleteItemFromList)
 
-export default router;
+module.exports = router;

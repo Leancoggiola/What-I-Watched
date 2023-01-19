@@ -1,19 +1,17 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import path from 'path';
-import * as dotenv from 'dotenv';
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
 
-import imdbRoutes from './endpoints/imdb/routes.js';
-import listRoutes from './endpoints/list/routes.js';
-import metadataRoutes from './endpoints/metadata/routes.js';
+const imdbRoutes = require('./endpoints/imdb/routes.js');
+const listRoutes = require('./endpoints/list/routes.js');
+const metadataRoutes = require('./endpoints/metadata/routes.js');
 
 // Constants
 const PORT = process.env.PORT || 8000;
 const app = express();
-const __dirname = path.resolve();
-dotenv.config()
+require('dotenv').config()
 
 // DB config
 mongoose.set('strictQuery', true)

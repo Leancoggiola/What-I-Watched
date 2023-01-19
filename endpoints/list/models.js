@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose');
 
 const listSchema = Schema({
     contentList: [Object],
@@ -7,4 +7,4 @@ const listSchema = Schema({
 
 const ListModel = model('lists', listSchema);
 
-export default ListModel;
+module.exports =  ListModel;

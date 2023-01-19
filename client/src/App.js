@@ -28,7 +28,7 @@ export default () => {
   const statusList = useSelector((state) => state.meta.statusList)
 
   useEffect(() => {
-    if(window.location.pathname != '/login' && window.navigator.onLine) {
+    if(window.location.pathname !== '/login' && window.navigator.onLine) {
       dispatch(isUserLoggedInRequest({ loginWithRedirect }))
     }
     return () => {
@@ -56,7 +56,7 @@ export default () => {
             <Suspense fallback={
                 <InprogressFallback status={'Autenticando Usuario'}/>
               }>
-                {window.location.pathname == '/login' ? <Login />:
+                {window.location.pathname === '/login' ? <Login />:
                 !appList.data || !statusList.data ? <InprogressFallback status={'Preparando la aplicacion'}/> :
                 !loggedUser.data ? <InprogressFallback status={'Autenticando Usuario'}/> :
                 <BaseRoute />}
