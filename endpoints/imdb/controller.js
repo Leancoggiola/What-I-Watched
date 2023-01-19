@@ -20,19 +20,16 @@ module.exports = {
             options.method = method;
             options.params = {...options.params, ...query}
             const {status, data} =  await axios.request(options);
-            console.log(options)
-            console.log(data)
+
+            const regex = /(?<=\/title\/)(.*?)(?=\/)/g
             const resBody = data?.results ? data.results.map(item => {
-                item.id = item.id.replace('title','').replaceAll('/','');
+                item.id = regex.exec(item.id)[1];
                 return pick(item, ['id', 'title', 'image', 'titleType'])
             }) : [];
-            console.log("LLEGO ACA 4")
             res.status(status).send(resBody)
         } catch(e) {
-            console.log(e)
             const {response: {status} = {},message = ''} = e;
-            
-            res.status(status).send(message)
+            res.status(status ? status : 400).send(message)
         }
     },
 
