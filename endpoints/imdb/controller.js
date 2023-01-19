@@ -21,6 +21,7 @@ module.exports = {
             options.params = {...options.params, ...query}
             const {status, data} =  await axios.request(options);
             console.log(options)
+            console.log(data)
             const resBody = data?.results ? data.results.map(item => {
                 item.id = item.id.replace('title','').replaceAll('/','');
                 return pick(item, ['id', 'title', 'image', 'titleType'])
