@@ -28,6 +28,7 @@ module.exports = {
             console.log("LLEGO ACA 4")
             res.status(status).send(resBody)
         } catch(e) {
+            console.log(e)
             const {response: {status} = {},message = ''} = e;
             
             res.status(status).send(message)

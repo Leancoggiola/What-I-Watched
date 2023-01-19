@@ -36,8 +36,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use((err, req, res, next) => {
-    res.status(500).send({ message: err.message });
-});
+    res.locals.error = err;
+    const status = err.status || 500;
+    res.status(status);
+    res.render('error');
+  });
 
 app.listen(PORT, () => {
     console.log(`Serve at http://localhost:${PORT}`);
