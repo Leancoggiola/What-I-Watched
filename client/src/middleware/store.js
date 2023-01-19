@@ -5,7 +5,7 @@ import rootReducer from './reducers';
 import rootSagas from './sagas';
 
 let composeEnhancers = compose;
-if(typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
+if(process.env.NODE_ENV !== 'production' && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
     composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({});
 }
 

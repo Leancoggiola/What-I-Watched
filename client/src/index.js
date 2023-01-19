@@ -3,6 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Auth0Provider } from '@auth0/auth0-react';
 import store from './middleware/store.js';
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+
+if(process.env.NODE_ENV === 'production') {
+  disableReactDevTools()
+}
 
 // App Component
 import App from './App';
