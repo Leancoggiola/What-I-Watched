@@ -33,7 +33,7 @@ const Home = () => {
         <>
             {!isEmpty(data) && 
             <main className='home-container page'>
-                {appList.data.map(app => {
+                {data.contentList.length > 0 ? appList.data.map(app => {
                     if(appToDisplay === 'all' || appToDisplay === app.name ) {
                         return (
                             <ListCarousel 
@@ -44,7 +44,10 @@ const Home = () => {
                                 key={app.name}
                             />
                         )}
-                    })
+                    }) :
+                    <div className='no-content'>
+                        <h1>Aun no has añadido contenido a tus listas.</h1>
+                    </div>
                 }
             </main>}
         </>
