@@ -15,7 +15,7 @@ import { APP_GET_APPS_LIST, STATUS_GET_STATUS_LIST } from '../constants/metadata
 function* getAppsWork() {
     try {
         const options = {
-            url: '/meta/getAppList',
+            url: '/api/meta/getAppList',
             method: 'GET'
         }
         const response = yield call(serviceCall, options)
@@ -28,7 +28,7 @@ function* getAppsWork() {
 function* getStatusWork() {
     try {
         const options = {
-            url: '/meta/getStatusList',
+            url: '/api/meta/getStatusList',
             method: 'GET'
         }
         const response = yield call(serviceCall, options)

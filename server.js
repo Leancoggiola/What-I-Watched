@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const path = require('path');
 
 const imdbRoutes = require('./endpoints/imdb/routes.js');
@@ -23,12 +22,11 @@ mongoose
 // Configuration
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors());
 
 // Routing
-app.use('/imdb', imdbRoutes)
-app.use('/list', listRoutes)
-app.use('/meta', metadataRoutes)
+app.use('/api/imdb', imdbRoutes)
+app.use('/api/list', listRoutes)
+app.use('/api/meta', metadataRoutes)
 
 // Deploy config
 if (process.env.NODE_ENV === 'production') {
