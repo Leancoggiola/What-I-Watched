@@ -25,7 +25,7 @@ const Home = () => {
         }
     }, [])
 
-    if(loading || crudState.loading) return <LoadingSpinner showPosRelative={true}/>
+    if(loading || crudState.loading) return <LoadingSpinner showPosRelative={true} fullscreen={true}/>
 
     if(error) return <ErrorMessage message={error.message} />
 

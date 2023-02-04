@@ -24,7 +24,7 @@ const ListCarousel = (props) => {
         {list.length > 0 &&
             <section className='list-carousel-container' style={{...appStyle}}> 
                 <Carousel slidesToShow={slidesToShow} extraSettings={{swipe: swipe}}>
-                    {list.length && list.map(item => (
+                    {list.length && list.sort((a,b) => a.order - b.order).map(item => (
                         <ContentCard item={item} key={item.title}/>
                     ))}
                 </Carousel>

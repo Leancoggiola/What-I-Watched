@@ -47,6 +47,9 @@
     .cc-progress-loader-content {
         top:50%;
     }
+    &.cc-progress-loader-pos-relative {
+        background-color: #ffffff50;
+    }
 }
 
 @keyframes loaderAnimation {
