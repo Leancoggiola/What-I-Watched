@@ -57,13 +57,13 @@
     }
 
     .next-arrow { 
-      right: -3rem;
+      right: -0.5rem;
       @media screen and (max-width: 480px){
         right: 0;
       }
     }
     .prev-arrow { 
-      left: -3rem; 
+      left: -0.5rem;
       @media screen and (max-width: 480px){
         left: 0;
       }
