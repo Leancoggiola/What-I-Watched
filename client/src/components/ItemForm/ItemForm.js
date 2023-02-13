@@ -34,7 +34,8 @@ const ItemForm = (props) => {
                 imageUrl: itemData.imageUrl,
                 appName: appInfo.name,
                 appDisplayName: appInfo.displayName,
-                status
+                status,
+                order: statusList.find(x => x.name === status).order
             }
         }
         isNew ? dispatch(postItemToListRequest(postBody)) : dispatch(putChangeItemOnListRequest(postBody))
