@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const ListCarousel = (props) => {
     const { list, appStyle } = props;
-    const slidesToShow = 6;
+    const slidesToShow = 5;
     const [ swipe, setSwipe] = useState(true)
 
     const handleBodyStyleMutation = (mutation) => {

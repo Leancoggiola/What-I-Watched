@@ -13,6 +13,7 @@ const Carousel = (props) => {
   const { children, slidesToShow, rows, extraSettings} = props;
 
   const settings = {
+    adaptiveHeight: true,
     className: 'cc-carousel',
     dots: false,
     infinite: false,

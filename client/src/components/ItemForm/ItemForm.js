@@ -38,6 +38,9 @@ const ItemForm = (props) => {
                 order: statusList.find(x => x.name === status).order
             }
         }
+        if (status === 'Terminado') {
+            postBody.content['finishedOn'] = new Date();
+        }
         isNew ? dispatch(postItemToListRequest(postBody)) : dispatch(putChangeItemOnListRequest(postBody))
         onClose()
     }

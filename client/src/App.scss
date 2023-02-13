@@ -62,7 +62,7 @@ body {
     }
     .page {
         margin-left: 5rem;
-        padding: 8rem 4rem;
+        padding: 8rem 4rem 0;
         min-height: calc(100vh - 4rem - 8rem);
         @media screen and (max-width: 480px){
             padding: 6rem 0;
